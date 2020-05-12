@@ -20,8 +20,10 @@ namespace OnlineQuiz
 
         private void btn_filter_Click(object sender, EventArgs e)
         {
-            
-            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString.connectionString)) {
+
+
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString.connectionString))
+            {
 
                 sqlConnection.Open();
                 //lấy toàn bộ dữ liệu;
@@ -43,8 +45,8 @@ namespace OnlineQuiz
                     MessageBox.Show(dr.GetString(0) + "\t" + dr.GetString(1) + "\t" + dr.GetByte(2) + "\t" + dr.GetByte(3));
                 }
                 sqlConnection.Close();
-            }           
-
+            }
         }
     }
 }
+
