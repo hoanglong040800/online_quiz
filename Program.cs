@@ -19,9 +19,9 @@ namespace OnlineQuiz
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            sqlConnection.Open();
+            
             Application.Run(new client_quiz());
-            sqlConnection.Close();
+            
         }       
     }
 }
