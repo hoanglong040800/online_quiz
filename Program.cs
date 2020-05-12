@@ -11,7 +11,6 @@ namespace OnlineQuiz
 {
     static class Program
     {
-        public static SqlConnection sqlConnection = new SqlConnection(@"Data Source=LongTran; Initial Catalog=online_quiz; Integrated Security=True");
 
         [STAThread]
         static void Main()
@@ -20,7 +19,7 @@ namespace OnlineQuiz
             Application.SetCompatibleTextRenderingDefault(false);
 
             
-            Application.Run(new client_quiz());
+            Application.Run(new server_resultlist());
             
         }       
     }

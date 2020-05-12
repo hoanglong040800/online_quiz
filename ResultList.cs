@@ -20,13 +20,14 @@ namespace OnlineQuiz
 
         private void btn_filter_Click(object sender, EventArgs e)
         {
-            using (Program.sqlConnection) {
-                Program.sqlConnection.Open();
+            
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString.connectionString)) {
 
+                sqlConnection.Open();
                 //lấy toàn bộ dữ liệu;
-                string strGetResult = "select * from RESULT";
+                string strGetResult = "select * from QUIZ";
 
-                SqlCommand cmdGetResult = new SqlCommand(strGetResult, Program.sqlConnection);
+                SqlCommand cmdGetResult = new SqlCommand(strGetResult, sqlConnection);
                 cmdGetResult.CommandType = CommandType.Text;
 
                 DataTable dt = new DataTable();
@@ -36,14 +37,14 @@ namespace OnlineQuiz
 
                 //lấy từng dòng dữ liệu
                 SqlDataReader dr = cmdGetResult.ExecuteReader();
-
+                dgv_result.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                 while (dr.Read())
                 {
                     MessageBox.Show(dr.GetString(0) + "\t" + dr.GetString(1) + "\t" + dr.GetByte(2) + "\t" + dr.GetByte(3));
                 }
-
-                Program.sqlConnection.Close();
+                sqlConnection.Close();
             }           
+
         }
     }
 }
