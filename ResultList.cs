@@ -20,24 +20,30 @@ namespace OnlineQuiz
 
         private void btn_filter_Click(object sender, EventArgs e)
         {
-            //lấy toàn bộ dữ liệu;
-            string strGetResult = "select cái gì đó from Ques + Ans where QuizID = cái gì đó";
+            using (Program.sqlConnection) {
+                Program.sqlConnection.Open();
 
-            SqlCommand cmdGetResult = new SqlCommand(strGetResult, Program.sqlConnection);
-            cmdGetResult.CommandType = CommandType.Text;
+                //lấy toàn bộ dữ liệu;
+                string strGetResult = "select * from RESULT";
 
-            DataTable dt = new DataTable();
-            (new SqlDataAdapter(cmdGetResult)).Fill(dt);
+                SqlCommand cmdGetResult = new SqlCommand(strGetResult, Program.sqlConnection);
+                cmdGetResult.CommandType = CommandType.Text;
 
-            dgv_result.DataSource = dt;
+                DataTable dt = new DataTable();
+                (new SqlDataAdapter(cmdGetResult)).Fill(dt);
 
-            //lấy từng dòng dữ liệu
-            SqlDataReader dr = cmdGetResult.ExecuteReader();
+                dgv_result.DataSource = dt;
 
-            while (dr.Read())
-            {
-                MessageBox.Show(dr.GetString(0) + "\t" + dr.GetString(1) + "\t" + dr.GetByte(2) + "\t" + dr.GetByte(3));
-            }
+                //lấy từng dòng dữ liệu
+                SqlDataReader dr = cmdGetResult.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    MessageBox.Show(dr.GetString(0) + "\t" + dr.GetString(1) + "\t" + dr.GetByte(2) + "\t" + dr.GetByte(3));
+                }
+
+                Program.sqlConnection.Close();
+            }           
         }
     }
 }
