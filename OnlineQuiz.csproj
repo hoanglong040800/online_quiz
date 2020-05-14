@@ -54,15 +54,14 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Answer.cs" />
-    <Compile Include="ConnectionString.cs" />
+    <Compile Include="Class_Ans.cs" />
     <Compile Include="Launcher.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Launcher.Designer.cs">
       <DependentUpon>Launcher.cs</DependentUpon>
     </Compile>
-    <Compile Include="Question.cs" />
+    <Compile Include="Class_QuesAns.cs" />
     <Compile Include="QuestionTest.cs">
       <SubType>Form</SubType>
     </Compile>

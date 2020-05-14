@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OnlineQuiz
 {
-    class Answer
+    class Ans
     {
         public string AnsID { get; set; }
         public string QuesID { get; set; }

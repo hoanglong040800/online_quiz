@@ -11,6 +11,7 @@ namespace OnlineQuiz
 {
     static class Program
     {
+        public static string connectionString = @"Data Source=LongTran; Initial Catalog=online_quiz; Integrated Security=True";
 
         [STAThread]
         static void Main()
@@ -19,7 +20,7 @@ namespace OnlineQuiz
             Application.SetCompatibleTextRenderingDefault(false);
 
             
-            Application.Run(new server_resultlist());
+            Application.Run(new form_questiontest());
             
         }       
     }

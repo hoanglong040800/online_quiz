@@ -1,6 +1,6 @@
 ﻿namespace OnlineQuiz
 {
-    partial class QuestionTest
+    partial class form_questiontest
     {
         /// <summary>
         /// Required designer variable.
@@ -28,17 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lbQuestion = new System.Windows.Forms.ListBox();
             this.btnShowQuestion = new System.Windows.Forms.Button();
+            this.lbQuestion = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
-            // 
-            // lbQuestion
-            // 
-            this.lbQuestion.FormattingEnabled = true;
-            this.lbQuestion.Location = new System.Drawing.Point(3, 103);
-            this.lbQuestion.Name = "lbQuestion";
-            this.lbQuestion.Size = new System.Drawing.Size(793, 342);
-            this.lbQuestion.TabIndex = 0;
             // 
             // btnShowQuestion
             // 
@@ -50,22 +42,29 @@
             this.btnShowQuestion.UseVisualStyleBackColor = true;
             this.btnShowQuestion.Click += new System.EventHandler(this.btnShowQuestion_Click);
             // 
-            // QuestionTest
+            // lbQuestion
+            // 
+            this.lbQuestion.FormattingEnabled = true;
+            this.lbQuestion.Location = new System.Drawing.Point(3, 103);
+            this.lbQuestion.Name = "lbQuestion";
+            this.lbQuestion.Size = new System.Drawing.Size(793, 342);
+            this.lbQuestion.TabIndex = 0;
+            // 
+            // form_questiontest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.btnShowQuestion);
             this.Controls.Add(this.lbQuestion);
-            this.Name = "QuestionTest";
+            this.Name = "form_questiontest";
             this.Text = "QuestionTest";
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.ListBox lbQuestion;
         private System.Windows.Forms.Button btnShowQuestion;
+        private System.Windows.Forms.ListBox lbQuestion;
     }
 }

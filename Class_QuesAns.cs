@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace OnlineQuiz
 {
-    class Question
+    class QuesAns
     {
         public string QuesID { get; set; }
         public string QuesContent { get; set; }
         public string PictureLink { get; set; }
-        public List<Answer> Answers { get; set; }
+        public List<Ans> Answers { get; set; }
 
         public string FullInfo
         {

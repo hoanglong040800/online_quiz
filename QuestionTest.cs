@@ -11,45 +11,50 @@ using System.Windows.Forms;
 
 namespace OnlineQuiz
 {
-    public partial class QuestionTest : Form
+    public partial class form_questiontest : Form
     {
-        public QuestionTest()
+        public form_questiontest()
         {
 
             InitializeComponent();
         }
-        List<Question> questions = new List<Question>();
+
+        List<QuesAns> liQuesAns = new List<QuesAns>();
+
         private void Update()
         {
-            lbQuestion.DataSource = questions;
+            lbQuestion.DataSource = liQuesAns;
             lbQuestion.DisplayMember = "FullInfo";
         }
 
-
         private void btnShowQuestion_Click(object sender, EventArgs e)
         {
-            string sql = "select *  from QUESTION QE join  ANSWER A on A.QuesID = QE.QuesID where exists (select * from QUIZ_QUESTION where QuizID = 'QZ01');"; //select cau hoi theo quizid
-            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(ConnectionString.connectionString))
+            //select QUESTION by QuizID
+            string strSQL_GetQuesAns = "select * from QUESTION QE join ANSWER AS on AS.QuesID = QE.QuesID where exists (select * from QUIZ_QUESTION where QuizID = 'QZ01')"; 
+
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Program.connectionString))
             {
-                var questionDictionary = new Dictionary<string, Question>();
-                var list = connection.Query<Question, Answer, Question>(
-                    sql,
+                var questionDictionary = new Dictionary<string, QuesAns>();
+
+                var list = connection.Query<QuesAns, Ans, QuesAns>(
+                    strSQL_GetQuesAns,
                     (question, answer) =>
                     {
-                        Question questionEntry;
+                        QuesAns questionEntry;
                         if (!questionDictionary.TryGetValue(question.QuesID, out questionEntry))
                         {
                             questionEntry = question;
-                            questionEntry.Answers = new List<Answer>();
+                            questionEntry.Answers = new List<Ans>();
                             questionDictionary.Add(questionEntry.QuesID, question);
                         }
-
                         questionEntry.Answers.Add(answer);
                         return questionEntry;
-                    }, splitOn: "AnsID")
-                    .Distinct()
-                    .ToList();
-                questions = (List<Question>)list;
+                    }, 
+                    splitOn: "AnsID"
+                ).Distinct().ToList();
+                // --- end of var list = connection.Query ---
+
+                liQuesAns = list;
             }
             Update();
         }
