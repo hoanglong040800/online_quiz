@@ -22,9 +22,13 @@ namespace OnlineQuiz
         public client_login()
         {
             InitializeComponent();
+            tcpClient.Connect("127.0.0.1", 8080);
+
         }
 
-        public static TcpClient tcpClient = new TcpClient();
+        public static TcpClient tcpClient = new TcpClient(); 
+
+        
 
         private bool LoginListener(StreamReader sr)
         {         
@@ -41,11 +45,12 @@ namespace OnlineQuiz
             MessageBox.Show("Đăng nhập thành công");
             return true;
         }
-
+        static public string quizID;
         private void btn_start_Click(object sender, EventArgs e)
         {         
             string strStuID  = tb_StuID.Text.Trim();
             string strQuizID = tb_QuizID.Text.Trim();
+            quizID = strQuizID;
             StreamReader sr = new StreamReader(tcpClient.GetStream());
             StreamWriter sw = new StreamWriter(tcpClient.GetStream());
 

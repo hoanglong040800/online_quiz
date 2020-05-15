@@ -44,6 +44,7 @@
             this.tb_curPage = new System.Windows.Forms.TextBox();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.lb_countdown = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pb_ques)).BeginInit();
             this.SuspendLayout();
             // 
@@ -229,9 +230,17 @@
             this.lb_countdown.Location = new System.Drawing.Point(490, 40);
             this.lb_countdown.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.lb_countdown.Name = "lb_countdown";
-            this.lb_countdown.Size = new System.Drawing.Size(95, 23);
+            this.lb_countdown.Size = new System.Drawing.Size(112, 23);
             this.lb_countdown.TabIndex = 44;
-            this.lb_countdown.Text = "2:00:00";
+            this.lb_countdown.Text = "00:00:00";
+            this.lb_countdown.Click += new System.EventHandler(this.lb_countdown_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(858, 30);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(110, 20);
+            this.textBox1.TabIndex = 45;
             // 
             // client_quiz
             // 
@@ -239,6 +248,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(1184, 687);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.lb_countdown);
             this.Controls.Add(this.tb_curPage);
             this.Controls.Add(this.button2);
@@ -279,5 +289,6 @@
         private System.Windows.Forms.TextBox tb_curPage;
         private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.Label lb_countdown;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }

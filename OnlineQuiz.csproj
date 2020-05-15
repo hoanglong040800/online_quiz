@@ -39,6 +39,8 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
     <Reference Include="System.Xaml" />
@@ -88,6 +90,7 @@
     <Compile Include="ClientLogin.Designer.cs">
       <DependentUpon>ClientLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="returnclass.cs" />
     <Compile Include="ServerResult.cs">
       <SubType>Form</SubType>
     </Compile>

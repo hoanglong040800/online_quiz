@@ -17,11 +17,14 @@ namespace OnlineQuiz
     public partial class client_quizinfo : Form
     {
         TcpClient tcpClient = new TcpClient();
+       
 
         public client_quizinfo()
         {
             InitializeComponent();
-            StreamWriter sw = new StreamWriter(client_login.tcpClient.GetStream());
+           tcpClient.Connect("127.0.0.1", 8080);
+          // StreamWriter sw = new StreamWriter(client_login.tcpClient.GetStream());
+            StreamWriter sw = new StreamWriter(tcpClient.GetStream());
             sw.WriteLine("Đã mở Quiz Info");
         }
 
