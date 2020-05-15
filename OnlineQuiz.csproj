@@ -62,43 +62,37 @@
       <DependentUpon>Launcher.cs</DependentUpon>
     </Compile>
     <Compile Include="Class_QuesAns.cs" />
-    <Compile Include="QuestionTest.cs">
+    <Compile Include="ClientQuiz.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="QuestionTest.Designer.cs">
-      <DependentUpon>QuestionTest.cs</DependentUpon>
+    <Compile Include="ClientQuiz.Designer.cs">
+      <DependentUpon>ClientQuiz.cs</DependentUpon>
     </Compile>
-    <Compile Include="Quiz.cs">
+    <Compile Include="ClientResult.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Quiz.Designer.cs">
-      <DependentUpon>Quiz.cs</DependentUpon>
+    <Compile Include="ClientResult.Designer.cs">
+      <DependentUpon>ClientResult.cs</DependentUpon>
     </Compile>
-    <Compile Include="QuizResult.cs">
+    <Compile Include="ClientQuizInfo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="QuizResult.Designer.cs">
-      <DependentUpon>QuizResult.cs</DependentUpon>
-    </Compile>
-    <Compile Include="QuizInfo.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="QuizInfo.Designer.cs">
-      <DependentUpon>QuizInfo.cs</DependentUpon>
+    <Compile Include="ClientQuizInfo.Designer.cs">
+      <DependentUpon>ClientQuizInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Login.cs">
+    <Compile Include="ClientLogin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Login.Designer.cs">
-      <DependentUpon>Login.cs</DependentUpon>
+    <Compile Include="ClientLogin.Designer.cs">
+      <DependentUpon>ClientLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="ResultList.cs">
+    <Compile Include="ServerResult.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ResultList.Designer.cs">
-      <DependentUpon>ResultList.cs</DependentUpon>
+    <Compile Include="ServerResult.Designer.cs">
+      <DependentUpon>ServerResult.cs</DependentUpon>
     </Compile>
     <Compile Include="ServerLauncher.cs">
       <SubType>Form</SubType>
@@ -109,17 +103,14 @@
     <EmbeddedResource Include="Launcher.resx">
       <DependentUpon>Launcher.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="QuestionTest.resx">
-      <DependentUpon>QuestionTest.cs</DependentUpon>
+    <EmbeddedResource Include="ClientQuiz.resx">
+      <DependentUpon>ClientQuiz.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Quiz.resx">
-      <DependentUpon>Quiz.cs</DependentUpon>
+    <EmbeddedResource Include="ClientResult.resx">
+      <DependentUpon>ClientResult.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="QuizResult.resx">
-      <DependentUpon>QuizResult.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="QuizInfo.resx">
-      <DependentUpon>QuizInfo.cs</DependentUpon>
+    <EmbeddedResource Include="ClientQuizInfo.resx">
+      <DependentUpon>ClientQuizInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -130,11 +121,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Login.resx">
-      <DependentUpon>Login.cs</DependentUpon>
+    <EmbeddedResource Include="ClientLogin.resx">
+      <DependentUpon>ClientLogin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ResultList.resx">
-      <DependentUpon>ResultList.cs</DependentUpon>
+    <EmbeddedResource Include="ServerResult.resx">
+      <DependentUpon>ServerResult.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ServerLauncher.resx">
       <DependentUpon>ServerLauncher.cs</DependentUpon>

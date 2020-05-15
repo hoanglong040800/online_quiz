@@ -30,9 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(client_login));
             this.lb_studentID = new System.Windows.Forms.Label();
-            this.tb_studentID = new System.Windows.Forms.TextBox();
+            this.tb_StuID = new System.Windows.Forms.TextBox();
             this.lb_code = new System.Windows.Forms.Label();
-            this.tb_code = new System.Windows.Forms.TextBox();
+            this.tb_QuizID = new System.Windows.Forms.TextBox();
             this.btn_start = new System.Windows.Forms.Button();
             this.pb_uit = new System.Windows.Forms.PictureBox();
             this.lb_OnlineQuiz = new System.Windows.Forms.Label();
@@ -50,18 +50,18 @@
             this.lb_studentID.TabIndex = 4;
             this.lb_studentID.Text = "ID";
             // 
-            // tb_studentID
+            // tb_StuID
             // 
-            this.tb_studentID.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.tb_studentID.BackColor = System.Drawing.Color.White;
-            this.tb_studentID.Font = new System.Drawing.Font("Chonburi", 10F);
-            this.tb_studentID.Location = new System.Drawing.Point(71, 236);
-            this.tb_studentID.Margin = new System.Windows.Forms.Padding(10, 10, 10, 15);
-            this.tb_studentID.Name = "tb_studentID";
-            this.tb_studentID.Size = new System.Drawing.Size(200, 23);
-            this.tb_studentID.TabIndex = 8;
-            this.tb_studentID.Text = "18520093";
-            this.tb_studentID.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tb_StuID.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.tb_StuID.BackColor = System.Drawing.Color.White;
+            this.tb_StuID.Font = new System.Drawing.Font("Chonburi", 10F);
+            this.tb_StuID.Location = new System.Drawing.Point(71, 236);
+            this.tb_StuID.Margin = new System.Windows.Forms.Padding(10, 10, 10, 15);
+            this.tb_StuID.Name = "tb_StuID";
+            this.tb_StuID.Size = new System.Drawing.Size(200, 23);
+            this.tb_StuID.TabIndex = 8;
+            this.tb_StuID.Text = "18520093";
+            this.tb_StuID.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lb_code
             // 
@@ -74,18 +74,18 @@
             this.lb_code.TabIndex = 7;
             this.lb_code.Text = "Mã Code quiz";
             // 
-            // tb_code
+            // tb_QuizID
             // 
-            this.tb_code.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.tb_code.BackColor = System.Drawing.Color.White;
-            this.tb_code.Font = new System.Drawing.Font("Chonburi", 10F);
-            this.tb_code.Location = new System.Drawing.Point(71, 317);
-            this.tb_code.Margin = new System.Windows.Forms.Padding(10, 10, 10, 15);
-            this.tb_code.Name = "tb_code";
-            this.tb_code.Size = new System.Drawing.Size(200, 23);
-            this.tb_code.TabIndex = 9;
-            this.tb_code.Text = "uHd0N2";
-            this.tb_code.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tb_QuizID.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.tb_QuizID.BackColor = System.Drawing.Color.White;
+            this.tb_QuizID.Font = new System.Drawing.Font("Chonburi", 10F);
+            this.tb_QuizID.Location = new System.Drawing.Point(71, 317);
+            this.tb_QuizID.Margin = new System.Windows.Forms.Padding(10, 10, 10, 15);
+            this.tb_QuizID.Name = "tb_QuizID";
+            this.tb_QuizID.Size = new System.Drawing.Size(200, 23);
+            this.tb_QuizID.TabIndex = 9;
+            this.tb_QuizID.Text = "uHd0N2";
+            this.tb_QuizID.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // btn_start
             // 
@@ -138,8 +138,8 @@
             this.Controls.Add(this.pb_uit);
             this.Controls.Add(this.lb_OnlineQuiz);
             this.Controls.Add(this.btn_start);
-            this.Controls.Add(this.tb_code);
-            this.Controls.Add(this.tb_studentID);
+            this.Controls.Add(this.tb_QuizID);
+            this.Controls.Add(this.tb_StuID);
             this.Controls.Add(this.lb_code);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -157,9 +157,9 @@
 
         #endregion
         private System.Windows.Forms.Label lb_studentID;
-        private System.Windows.Forms.TextBox tb_studentID;
+        private System.Windows.Forms.TextBox tb_StuID;
         private System.Windows.Forms.Label lb_code;
-        private System.Windows.Forms.TextBox tb_code;
+        private System.Windows.Forms.TextBox tb_QuizID;
         private System.Windows.Forms.Button btn_start;
         private System.Windows.Forms.PictureBox pb_uit;
         private System.Windows.Forms.Label lb_OnlineQuiz;

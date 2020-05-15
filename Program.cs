@@ -17,11 +17,8 @@ namespace OnlineQuiz
         static void Main()
         {
             Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-
-            
-            Application.Run(new form_questiontest());
-            
+            Application.SetCompatibleTextRenderingDefault(false);           
+            Application.Run(new launcher());           
         }       
     }
 }
