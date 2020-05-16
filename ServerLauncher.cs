@@ -25,7 +25,9 @@ namespace OnlineQuiz
             (new Thread(ServerListen)).Start();
         }
 
+        
         List<QuesAns> liQuesAns = new List<QuesAns>();
+
 
         // Server lắng nghe
         private void ServerListen()
@@ -46,6 +48,7 @@ namespace OnlineQuiz
             TcpClient tcpClient = (TcpClient)obj;
             StreamReader sr = new StreamReader(tcpClient.GetStream());
             StreamWriter sw = new StreamWriter(tcpClient.GetStream());
+            NetworkStream ns = tcpClient.GetStream();
 
             if (LoginCheck(sr, sw) == false)
             {
@@ -55,46 +58,46 @@ namespace OnlineQuiz
             }
 
             MessageBox.Show(sr.ReadLine());
+
+            MessageBox.Show(sr.ReadLine());
         }
 
         // Kiểm tra Login
         private bool LoginCheck(StreamReader sr, StreamWriter sw)
         {
             string strSignal = "";
-            string strStuID = "";
+            string strStuID  = "";
             string strQuizID = "";
+            string strSqlCmd = "";
 
             //Vòng lặp kiểm tra login
             while (true)
             {
                 strSignal = sr.ReadLine();
-                if      (strSignal != "LOGIN")      continue;
+                if (strSignal != "LOGIN") continue;
                 else if (strSignal == "DISCONNECT") return false;
 
                 strStuID = sr.ReadLine();
                 strQuizID = sr.ReadLine();
 
-                if (strStuID == "18520093")
-                    sw.WriteLine("LOGIN SUCCESS");
+                strSqlCmd = "select StuID from STUDENT where StuID='" + strStuID + "'";
 
-                else
+                using (SqlConnection sqlConnection = new SqlConnection(Program.connectionString))
                 {
-                    sw.WriteLine("LOGIN FAIL");
-                    sw.Flush();
-                    continue;
+                    SqlCommand cmd = new SqlCommand(strSqlCmd, sqlConnection);
+                    cmd.CommandType = CommandType.Text;
                 }
-
-                //Nhập dữ liệu vào table Result
-                sw.Flush();
-                MessageBox.Show("Login hoàn tất");
-                break;
             }
+
+            //Nhập dữ liệu vào table Result
+            sw.Flush();
+            MessageBox.Show("Login hoàn tất");
+            
 
             MessageBox.Show("Lưu thông tin hoàn tất");
             return true;
         }
-
-
+        
         private void ServerSend()
         {
             /*string strSQL_GetQuesAns = "select * from QUESTION QE join ANSWER A on A.QuesID = QE.QuesID where exists (select * from QUIZ_QUESTION where QuizID = 'QZ01')";

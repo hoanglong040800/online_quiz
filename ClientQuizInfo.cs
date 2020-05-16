@@ -16,13 +16,10 @@ namespace OnlineQuiz
 {
     public partial class client_quizinfo : Form
     {
-        TcpClient tcpClient = new TcpClient();
-
+        //Truyền dữ liệu tham chiếu từ client_login
         public client_quizinfo()
         {
             InitializeComponent();
-            StreamWriter sw = new StreamWriter(client_login.tcpClient.GetStream());
-            sw.WriteLine("Đã mở Quiz Info");
         }
 
         private void btn_start_Click(object sender, EventArgs e)

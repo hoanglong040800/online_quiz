@@ -19,7 +19,7 @@ namespace OnlineQuiz
 
         private void btn_submit_Click(object sender, EventArgs e)
         {
-            (new client_quizresult()).Show();
+            (new client_result()).Show();
             Close();
         }
 

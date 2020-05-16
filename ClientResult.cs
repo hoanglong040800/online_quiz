@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace OnlineQuiz
 {
-    public partial class client_quizresult : Form
+    public partial class client_result : Form
     {
-        public client_quizresult()
+        public client_result()
         {
             InitializeComponent();
         }

@@ -2,7 +2,7 @@
 
 {
 
-    partial class client_quizresult
+    partial class client_result
     {
 
         /// <summary>
@@ -31,7 +31,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(client_quizresult));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(client_result));
             this.btn_exit = new System.Windows.Forms.Button();
             this.gb_result = new System.Windows.Forms.GroupBox();
             this.lb_Score = new System.Windows.Forms.Label();
@@ -171,7 +171,7 @@
             this.lb_time.Text = "Thời gian: 120 phút";
             this.lb_time.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // client_quizresult
+            // client_result
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -187,7 +187,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximumSize = new System.Drawing.Size(360, 540);
             this.MinimumSize = new System.Drawing.Size(360, 540);
-            this.Name = "client_quizresult";
+            this.Name = "client_result";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.gb_result.ResumeLayout(false);

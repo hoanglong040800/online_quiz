@@ -12,19 +12,16 @@ using System.Net.Sockets;
 using System.IO;
 using System.Threading;
 
-
-
-
 namespace OnlineQuiz
 {
     public partial class client_login : Form
     {
+        Client cli=new Client();
+
         public client_login()
         {
             InitializeComponent();
         }
-
-        public static TcpClient tcpClient = new TcpClient();
 
         private bool LoginListener(StreamReader sr)
         {         
@@ -35,19 +32,21 @@ namespace OnlineQuiz
                 strSignal = sr.ReadLine();
                 if (strSignal == "LOGIN SUCCESS") break;
                 MessageBox.Show("Tham gia Quiz thất bại! Vui lòng kiểm tra lại MSSV và Mã code quiz");
+                cli.CloseConnection();
             }
 
             sr.Close();
             MessageBox.Show("Đăng nhập thành công");
+            cli.CloseConnection();
             return true;
         }
 
         private void btn_start_Click(object sender, EventArgs e)
-        {         
+        {
             string strStuID  = tb_StuID.Text.Trim();
             string strQuizID = tb_QuizID.Text.Trim();
-            StreamReader sr = new StreamReader(tcpClient.GetStream());
-            StreamWriter sw = new StreamWriter(tcpClient.GetStream());
+            StreamReader sr = new StreamReader(cli.tcpClient.GetStream());
+            StreamWriter sw = new StreamWriter(cli.tcpClient.GetStream());
 
             if (strStuID == "" || strQuizID == "")
             {
@@ -60,10 +59,12 @@ namespace OnlineQuiz
             sw.WriteLine(strQuizID);
             sw.Flush();
 
+
             if (LoginListener(sr) == true)
             {
                 (new client_quizinfo()).Show();
-                Hide();
+                cli.CloseConnection();
+                Close();
             }
         }
         
