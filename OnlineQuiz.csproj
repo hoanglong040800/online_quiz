@@ -65,56 +65,55 @@
       <DependentUpon>Launcher.cs</DependentUpon>
     </Compile>
     <Compile Include="Class_QuesAns.cs" />
-    <Compile Include="ClientQuiz.cs">
+    <Compile Include="Client_Quiz.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ClientQuiz.Designer.cs">
-      <DependentUpon>ClientQuiz.cs</DependentUpon>
+    <Compile Include="Client_Quiz.Designer.cs">
+      <DependentUpon>Client_Quiz.cs</DependentUpon>
     </Compile>
-    <Compile Include="ClientResult.cs">
+    <Compile Include="Client_Result.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ClientResult.Designer.cs">
-      <DependentUpon>ClientResult.cs</DependentUpon>
+    <Compile Include="Client_Result.Designer.cs">
+      <DependentUpon>Client_Result.cs</DependentUpon>
     </Compile>
-    <Compile Include="ClientQuizInfo.cs">
+    <Compile Include="Client_QuizInfo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ClientQuizInfo.Designer.cs">
-      <DependentUpon>ClientQuizInfo.cs</DependentUpon>
+    <Compile Include="Client_QuizInfo.Designer.cs">
+      <DependentUpon>Client_QuizInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ClientLogin.cs">
+    <Compile Include="Client_Login.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ClientLogin.Designer.cs">
-      <DependentUpon>ClientLogin.cs</DependentUpon>
+    <Compile Include="Client_Login.Designer.cs">
+      <DependentUpon>Client_Login.cs</DependentUpon>
     </Compile>
-    <Compile Include="returnclass.cs" />
-    <Compile Include="ServerResult.cs">
+    <Compile Include="Server_Result.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ServerResult.Designer.cs">
-      <DependentUpon>ServerResult.cs</DependentUpon>
+    <Compile Include="Server_Result.Designer.cs">
+      <DependentUpon>Server_Result.cs</DependentUpon>
     </Compile>
-    <Compile Include="ServerLauncher.cs">
+    <Compile Include="Server_Launcher.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ServerLauncher.Designer.cs">
-      <DependentUpon>ServerLauncher.cs</DependentUpon>
+    <Compile Include="Server_Launcher.Designer.cs">
+      <DependentUpon>Server_Launcher.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Launcher.resx">
       <DependentUpon>Launcher.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ClientQuiz.resx">
-      <DependentUpon>ClientQuiz.cs</DependentUpon>
+    <EmbeddedResource Include="Client_Quiz.resx">
+      <DependentUpon>Client_Quiz.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ClientResult.resx">
-      <DependentUpon>ClientResult.cs</DependentUpon>
+    <EmbeddedResource Include="Client_Result.resx">
+      <DependentUpon>Client_Result.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ClientQuizInfo.resx">
-      <DependentUpon>ClientQuizInfo.cs</DependentUpon>
+    <EmbeddedResource Include="Client_QuizInfo.resx">
+      <DependentUpon>Client_QuizInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -125,14 +124,14 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="ClientLogin.resx">
-      <DependentUpon>ClientLogin.cs</DependentUpon>
+    <EmbeddedResource Include="Client_Login.resx">
+      <DependentUpon>Client_Login.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ServerResult.resx">
-      <DependentUpon>ServerResult.cs</DependentUpon>
+    <EmbeddedResource Include="Server_Result.resx">
+      <DependentUpon>Server_Result.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ServerLauncher.resx">
-      <DependentUpon>ServerLauncher.cs</DependentUpon>
+    <EmbeddedResource Include="Server_Launcher.resx">
+      <DependentUpon>Server_Launcher.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
