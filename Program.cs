@@ -11,7 +11,7 @@ namespace OnlineQuiz
 {
     static class Program
     {
-        public static string connectionString = @"Data Source=LongTran; Initial Catalog=online_quiz; Integrated Security=True; MultipleActiveResultSets=true;";
+        public static string connectionString = @"Data Source=HIEULE; Initial Catalog=online_quiz; Integrated Security=True; MultipleActiveResultSets=true;";
 
         [STAThread]
         static void Main()

@@ -13,7 +13,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.IO;
 using System.Threading;
-
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace OnlineQuiz
 {
@@ -49,17 +49,28 @@ namespace OnlineQuiz
             TcpClient tcpClient = (TcpClient)obj;
             StreamReader sr = new StreamReader(tcpClient.GetStream());
             StreamWriter sw = new StreamWriter(tcpClient.GetStream());
+            NetworkStream ns = tcpClient.GetStream();
             sw.AutoFlush = true;
 
             if (sr.ReadLine() == "LOGIN")
-            { 
-                LoginCheck(sr, sw);
+            {
+                if (LoginCheck(sr, sw))
+                {
+                    string strQuizID = "";
+                    SendQuizInfor(sr, ns, out strQuizID);
+                    SendListQuesAns(sr, ns, strQuizID);
+                    sr.Close();
+                    sw.Close();
+                    ns.Close();
+                    tcpClient.Close();
+                }
+
                 return;
             }
         }
 
         // Kiểm tra thông tin Login
-        private void LoginCheck(StreamReader sr, StreamWriter sw)
+        private bool LoginCheck(StreamReader sr, StreamWriter sw)
         {
             string strSignal      = "";
             string strStuID       = sr.ReadLine();
@@ -79,11 +90,10 @@ namespace OnlineQuiz
 
                 if (reader.Read())
                     strSignal = "FOUND";
-
                 else
                 {
                     sw.WriteLine("LOGIN FAIL");
-                    return;
+                    return false;
                 }
                 
                 // Tìm kiếm QuizID
@@ -97,7 +107,7 @@ namespace OnlineQuiz
                 else
                 {
                     sw.WriteLine("LOGIN FAIL");
-                    return;
+                    return false;
                 }
 
                 sqlConnection.Close();
@@ -106,6 +116,7 @@ namespace OnlineQuiz
             //Nhập thông tin thí sinh vào bảng Result
             InsertIntoResult(strStuID, strQuizID);
             sw.WriteLine("LOGIN SUCCESS");
+            return true;
         }
 
         private void InsertIntoResult(string strStuID, string strQuizID)
@@ -135,42 +146,74 @@ namespace OnlineQuiz
                 sqlConnection.Close();
             }
         }
-        
-        private void ServerSend()
+
+        private void SendQuizInfor(StreamReader sr, NetworkStream ns, out string strQuizID)
         {
-            /*string strSQL_GetQuesAns = "select * from QUESTION QE join ANSWER A on A.QuesID = QE.QuesID where exists (select * from QUIZ_QUESTION where QuizID = 'QZ01')";
-
-            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Program.connectionString))
+            while (true)
             {
-                var questionDictionary = new Dictionary<string, QuesAns>();
-
-                var list = connection.Query<QuesAns, Ans, QuesAns>(
-                    strSQL_GetQuesAns,
-                    (question, answer) =>
+                strQuizID = sr.ReadLine();
+                if (strQuizID != "")
+                {
+                    Quiz quiz = new Quiz();
+                    string strSQL_GetQuiz = $"select * from QUIZ where QuizID = '{strQuizID}' "; // strQuizID
+                    using (IDbConnection connection = new SqlConnection(Program.connectionString))
                     {
-                        QuesAns questionEntry;
-                        if (!questionDictionary.TryGetValue(question.QuesID, out questionEntry))
-                        {
-                            questionEntry = question;
-                            questionEntry.Answers = new List<Ans>();
-                            questionDictionary.Add(questionEntry.QuesID, question);
-                        }
-                        questionEntry.Answers.Add(answer);
-                        return questionEntry;
-                    },
-                    splitOn: "AnsID"
-                ).Distinct().ToList();
-                // --- end of var list = connection.Query ---
-
-                liQuesAns = list;
+                        quiz = connection.QuerySingle<Quiz>(strSQL_GetQuiz);
+                    }
+                    MessageBox.Show(quiz.QuizID);
+                    BinaryFormatter bf = new BinaryFormatter();
+                    bf.Serialize(ns, quiz);
+                    ns.Flush();
+                    break;
+                }
+                else MessageBox.Show("error");
             }
-            Update();*/
+
+
         }
 
-        private void Update()
+        private void SendListQuesAns(StreamReader sr, NetworkStream ns, string QuizID)
         {
-            //lbQuestion.DataSource = liQuesAns;
-            //lbQuestion.DisplayMember = "FullInfo";
+            string strSignal = "";
+            while (true)
+            {
+                strSignal = sr.ReadLine();
+                if (strSignal == "QUESANS")
+                {
+                    List<QuesAns> liQuesAns = new List<QuesAns>();
+                    string strSQL_GetQuesAns = $"select * from QUESTION QE join ANSWER A on A.QuesID = QE.QuesID where exists (select * from QUIZ_QUESTION where QuizID = '{QuizID}')";
+                    using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Program.connectionString))
+                    {
+                        var questionDictionary = new Dictionary<string, QuesAns>();
+
+                        var list = connection.Query<QuesAns, Ans, QuesAns>(
+                            strSQL_GetQuesAns,
+                            (question, answer) =>
+                            {
+                                QuesAns questionEntry;
+                                if (!questionDictionary.TryGetValue(question.QuesID, out questionEntry))
+                                {
+                                    questionEntry = question;
+                                    questionEntry.Answers = new List<Ans>();
+                                    questionDictionary.Add(questionEntry.QuesID, question);
+                                }
+                                questionEntry.Answers.Add(answer);
+                                return questionEntry;
+                            },
+                            splitOn: "AnsID"
+                        ).Distinct().ToList();
+                        liQuesAns = list;
+                    }// --- end of var list = connection.Query ---
+
+                    MessageBox.Show(liQuesAns[0].ToString());
+                    BinaryFormatter bf = new BinaryFormatter();
+                    bf.Serialize(ns, liQuesAns);
+                    ns.Flush();
+                    break;
+                }// end if
+
+            } //end While
+
         }
 
         private void btn_quizresult_Click(object sender, EventArgs e)

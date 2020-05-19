@@ -11,12 +11,15 @@ using System.Net;
 using System.Net.Sockets;
 using System.IO;
 using System.Threading;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace OnlineQuiz
 {
     public partial class client_login : Form
     {
         Client cli=new Client();
+        Quiz quiz = new Quiz();
+        List<QuesAns> liQuesAns = new List<QuesAns>();
 
         public client_login()
         {
@@ -28,8 +31,8 @@ namespace OnlineQuiz
             if (sr.ReadLine() == "LOGIN SUCCESS")
             {
                 MessageBox.Show("Đăng nhập thành công");
-                sr.Close();
-                cli.CloseConnection();
+                //sr.Close();
+                //cli.CloseConnection();
                 return true;
             }
 
@@ -60,10 +63,29 @@ namespace OnlineQuiz
             sw.Flush();
 
 
-            if (LoginListener(sr) == true)
+            if (LoginListener(sr))
             {
+                //Gửi QuizID
+                sw.WriteLine(strQuizID);
+                sw.Flush();
+
+                BinaryFormatter bf = new BinaryFormatter();
+                quiz = (Quiz)bf.Deserialize(cli.ns);
+                MessageBox.Show(quiz.QuizID);
+                //kết thúc nhận QuizInfor
+
+                //bắt đầu nhận list<QuesAns>
+                sw.WriteLine("QUESANS");
+                sw.Flush();
+                BinaryFormatter bf1 = new BinaryFormatter();
+                liQuesAns = (List<QuesAns>)bf1.Deserialize(cli.ns);
+                MessageBox.Show(liQuesAns.ToString());
+                cli.CloseConnection();
+                //kết thúc nhận list<QuesAns>
+                
                 (new client_quizinfo()).Show();
                 Close();
+                
             }
         }
     }
