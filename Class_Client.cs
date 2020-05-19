@@ -16,7 +16,6 @@ namespace OnlineQuiz
     {
         public TcpClient tcpClient;
         public NetworkStream ns;
-        public string strSignal;
 
         public void CloseConnection()
         {
@@ -26,10 +25,17 @@ namespace OnlineQuiz
 
         public Client()
         {
-            tcpClient = new TcpClient();
-            tcpClient.Connect(IPAddress.Parse("127.0.0.1"), 8080);
-            ns = tcpClient.GetStream();
-            strSignal = "";
+            try
+            {
+                tcpClient = new TcpClient();
+                tcpClient.Connect(IPAddress.Parse("127.0.0.1"), 8080);
+                ns = tcpClient.GetStream();
+            }
+
+            catch
+            {
+                MessageBox.Show("Không thể kết nối do Server chưa được bật");
+            }
         }
     }
 }

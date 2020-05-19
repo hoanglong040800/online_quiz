@@ -33,7 +33,7 @@
             this.tb_StuID = new System.Windows.Forms.TextBox();
             this.lb_code = new System.Windows.Forms.Label();
             this.tb_QuizID = new System.Windows.Forms.TextBox();
-            this.btn_start = new System.Windows.Forms.Button();
+            this.btn_login = new System.Windows.Forms.Button();
             this.pb_uit = new System.Windows.Forms.PictureBox();
             this.lb_OnlineQuiz = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pb_uit)).BeginInit();
@@ -60,7 +60,7 @@
             this.tb_StuID.Name = "tb_StuID";
             this.tb_StuID.Size = new System.Drawing.Size(200, 23);
             this.tb_StuID.TabIndex = 8;
-            this.tb_StuID.Text = "18520093";
+            this.tb_StuID.Text = "18520052";
             this.tb_StuID.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lb_code
@@ -84,23 +84,23 @@
             this.tb_QuizID.Name = "tb_QuizID";
             this.tb_QuizID.Size = new System.Drawing.Size(200, 23);
             this.tb_QuizID.TabIndex = 9;
-            this.tb_QuizID.Text = "uHd0N2";
+            this.tb_QuizID.Text = "QZ03";
             this.tb_QuizID.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // btn_start
+            // btn_login
             // 
-            this.btn_start.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.btn_start.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_start.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_start.Font = new System.Drawing.Font("Chonburi", 10F);
-            this.btn_start.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btn_start.Location = new System.Drawing.Point(117, 420);
-            this.btn_start.Name = "btn_start";
-            this.btn_start.Size = new System.Drawing.Size(108, 35);
-            this.btn_start.TabIndex = 10;
-            this.btn_start.Text = "Vào Quiz";
-            this.btn_start.UseVisualStyleBackColor = false;
-            this.btn_start.Click += new System.EventHandler(this.btn_start_Click);
+            this.btn_login.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.btn_login.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_login.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_login.Font = new System.Drawing.Font("Chonburi", 10F);
+            this.btn_login.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btn_login.Location = new System.Drawing.Point(117, 420);
+            this.btn_login.Name = "btn_login";
+            this.btn_login.Size = new System.Drawing.Size(108, 35);
+            this.btn_login.TabIndex = 10;
+            this.btn_login.Text = "Đăng nhập";
+            this.btn_login.UseVisualStyleBackColor = false;
+            this.btn_login.Click += new System.EventHandler(this.btn_login_Click);
             // 
             // pb_uit
             // 
@@ -137,7 +137,7 @@
             this.Controls.Add(this.lb_studentID);
             this.Controls.Add(this.pb_uit);
             this.Controls.Add(this.lb_OnlineQuiz);
-            this.Controls.Add(this.btn_start);
+            this.Controls.Add(this.btn_login);
             this.Controls.Add(this.tb_QuizID);
             this.Controls.Add(this.tb_StuID);
             this.Controls.Add(this.lb_code);
@@ -160,7 +160,7 @@
         private System.Windows.Forms.TextBox tb_StuID;
         private System.Windows.Forms.Label lb_code;
         private System.Windows.Forms.TextBox tb_QuizID;
-        private System.Windows.Forms.Button btn_start;
+        private System.Windows.Forms.Button btn_login;
         private System.Windows.Forms.PictureBox pb_uit;
         private System.Windows.Forms.Label lb_OnlineQuiz;
     }

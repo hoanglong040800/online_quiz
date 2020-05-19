@@ -25,77 +25,115 @@ namespace OnlineQuiz
             (new Thread(ServerListen)).Start();
         }
 
-        
-        List<QuesAns> liQuesAns = new List<QuesAns>();
-
-
         // Server lắng nghe
         private void ServerListen()
         {
-            TcpListener tcpListener = new TcpListener(IPAddress.Parse("127.0.0.1"), 8080);
-            tcpListener.Start();
-
-            while (true)
+            try
             {
-                TcpClient tcpClient = tcpListener.AcceptTcpClient();
-                (new Thread(ServerProcess)).Start(tcpClient);
+                TcpListener tcpListener = new TcpListener(IPAddress.Parse("127.0.0.1"), 8080);
+                tcpListener.Start();
+
+                while (true)
+                {
+                    TcpClient tcpClient = tcpListener.AcceptTcpClient();
+                    (new Thread(ServerProcess)).Start(tcpClient);
+                }
             }
+
+            catch {}
         }
 
-        // Kiểm tra login, lưu thông tin result, gửi đề, nhận đáp án, trả kết quả
+        // Điều hướng xử lí cho Server
         private void ServerProcess(object obj)
         {
             TcpClient tcpClient = (TcpClient)obj;
             StreamReader sr = new StreamReader(tcpClient.GetStream());
             StreamWriter sw = new StreamWriter(tcpClient.GetStream());
-            NetworkStream ns = tcpClient.GetStream();
+            sw.AutoFlush = true;
 
-            if (LoginCheck(sr, sw) == false)
-            {
-                tcpClient.Close();
-                MessageBox.Show("Ngắt kết nối");
+            if (sr.ReadLine() == "LOGIN")
+            { 
+                LoginCheck(sr, sw);
                 return;
             }
-
-            MessageBox.Show(sr.ReadLine());
-
-            MessageBox.Show(sr.ReadLine());
         }
 
-        // Kiểm tra Login
-        private bool LoginCheck(StreamReader sr, StreamWriter sw)
+        // Kiểm tra thông tin Login
+        private void LoginCheck(StreamReader sr, StreamWriter sw)
         {
-            string strSignal = "";
-            string strStuID  = "";
-            string strQuizID = "";
-            string strSqlCmd = "";
+            string strSignal      = "";
+            string strStuID       = sr.ReadLine();
+            string strQuizID      = sr.ReadLine();
 
-            //Vòng lặp kiểm tra login
-            while (true)
+            //Kiểm tra thông tin login
+            using (SqlConnection sqlConnection = new SqlConnection(Program.connectionString))
             {
-                strSignal = sr.ReadLine();
-                if (strSignal != "LOGIN") continue;
-                else if (strSignal == "DISCONNECT") return false;
+                sqlConnection.Open();
+                SqlCommand cmd;
+                SqlDataReader reader;
 
-                strStuID = sr.ReadLine();
-                strQuizID = sr.ReadLine();
+                // Tìm kiếm StuID
+                cmd = new SqlCommand("select StuID from STUDENT where StuID = @StuID ", sqlConnection);
+                cmd.Parameters.AddWithValue("@StuID", strStuID);
+                reader = cmd.ExecuteReader();
 
-                strSqlCmd = "select StuID from STUDENT where StuID='" + strStuID + "'";
+                if (reader.Read())
+                    strSignal = "FOUND";
 
-                using (SqlConnection sqlConnection = new SqlConnection(Program.connectionString))
+                else
                 {
-                    SqlCommand cmd = new SqlCommand(strSqlCmd, sqlConnection);
-                    cmd.CommandType = CommandType.Text;
+                    sw.WriteLine("LOGIN FAIL");
+                    return;
                 }
+                
+                // Tìm kiếm QuizID
+                reader.Close();
+                cmd = new SqlCommand("select QuizID from QUIZ where QuizID = @QuizID ", sqlConnection);
+                cmd.Parameters.AddWithValue("@QuizID", strQuizID);
+                reader = cmd.ExecuteReader();
+
+                if (reader.Read() && strSignal == "FOUND") { }
+
+                else
+                {
+                    sw.WriteLine("LOGIN FAIL");
+                    return;
+                }
+
+                sqlConnection.Close();
             }
 
-            //Nhập dữ liệu vào table Result
-            sw.Flush();
-            MessageBox.Show("Login hoàn tất");
-            
+            //Nhập thông tin thí sinh vào bảng Result
+            InsertIntoResult(strStuID, strQuizID);
+            sw.WriteLine("LOGIN SUCCESS");
+        }
 
-            MessageBox.Show("Lưu thông tin hoàn tất");
-            return true;
+        private void InsertIntoResult(string strStuID, string strQuizID)
+        {
+            using (SqlConnection sqlConnection = new SqlConnection(Program.connectionString))
+            {
+                sqlConnection.Open();
+                SqlCommand cmd;
+                SqlDataReader reader;
+
+                cmd = new SqlCommand("select StuID, QuizID from RESULT where StuID = @StuID and QuizID = @QuizID", sqlConnection);
+                cmd.Parameters.AddWithValue("@StuID"  , strStuID);
+                cmd.Parameters.AddWithValue("@QuizID" , strQuizID);
+                reader = cmd.ExecuteReader();
+
+                //TH chưa có StuID và QuizID trong table Result
+                if (!reader.Read())
+                {
+                    MessageBox.Show("Not Found");
+
+                    cmd = new SqlCommand("insert into RESULT values ( @StuID , @QuizID , null ) ", sqlConnection);
+                    cmd.Parameters.AddWithValue("@StuID", strStuID);
+                    cmd.Parameters.AddWithValue("@QuizID", strQuizID);
+                    cmd.ExecuteNonQuery();
+                }
+
+                sqlConnection.Close();
+            }
         }
         
         private void ServerSend()

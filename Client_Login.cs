@@ -25,28 +25,28 @@ namespace OnlineQuiz
 
         private bool LoginListener(StreamReader sr)
         {         
-            string strSignal = "";
-
-            while (true)
+            if (sr.ReadLine() == "LOGIN SUCCESS")
             {
-                strSignal = sr.ReadLine();
-                if (strSignal == "LOGIN SUCCESS") break;
-                MessageBox.Show("Tham gia Quiz thất bại! Vui lòng kiểm tra lại MSSV và Mã code quiz");
+                MessageBox.Show("Đăng nhập thành công");
+                sr.Close();
                 cli.CloseConnection();
+                return true;
             }
 
-            sr.Close();
-            MessageBox.Show("Đăng nhập thành công");
-            cli.CloseConnection();
-            return true;
+            else
+            {
+                MessageBox.Show("Tham gia Quiz thất bại! Vui lòng kiểm tra lại MSSV và Mã code quiz");
+                cli.CloseConnection();
+                return false;
+            }
         }
 
-        private void btn_start_Click(object sender, EventArgs e)
+        private void btn_login_Click(object sender, EventArgs e)
         {
-            string strStuID  = tb_StuID.Text.Trim();
+            string strStuID = tb_StuID.Text.Trim();
             string strQuizID = tb_QuizID.Text.Trim();
-            StreamReader sr = new StreamReader(cli.tcpClient.GetStream());
-            StreamWriter sw = new StreamWriter(cli.tcpClient.GetStream());
+            StreamReader sr = new StreamReader(cli.ns);
+            StreamWriter sw = new StreamWriter(cli.ns);
 
             if (strStuID == "" || strQuizID == "")
             {
@@ -63,10 +63,8 @@ namespace OnlineQuiz
             if (LoginListener(sr) == true)
             {
                 (new client_quizinfo()).Show();
-                cli.CloseConnection();
                 Close();
             }
         }
-        
     }
 }
