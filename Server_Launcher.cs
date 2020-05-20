@@ -175,7 +175,7 @@ namespace OnlineQuiz
 
         private void btn_quizresult_Click(object sender, EventArgs e)
         {
-            (new server_resultlist()).Show();
+            (new server_result()).Show();
 
         }
     }
