@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace OnlineQuiz
 {
+    [Serializable]
     class Ans
     {
         public string AnsID { get; set; }

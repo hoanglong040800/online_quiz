@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Class_Ans.cs" />
     <Compile Include="Class_Client.cs" />
+    <Compile Include="Class_Quiz.cs" />
     <Compile Include="Launcher.cs">
       <SubType>Form</SubType>
     </Compile>
