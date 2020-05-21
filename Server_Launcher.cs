@@ -135,7 +135,7 @@ namespace OnlineQuiz
                 //TH chưa có StuID và QuizID trong table Result
                 if (!reader.Read())
                 {
-                    MessageBox.Show("Not Found");
+                    MessageBox.Show("Not Found in Result");
 
                     cmd = new SqlCommand("insert into RESULT values ( @StuID , @QuizID , null ) ", sqlConnection);
                     cmd.Parameters.AddWithValue("@StuID", strStuID);
@@ -168,8 +168,6 @@ namespace OnlineQuiz
                 }
                 else MessageBox.Show("error");
             }
-
-
         }
 
         private void SendListQuesAns(StreamReader sr, NetworkStream ns, string QuizID)
@@ -182,6 +180,7 @@ namespace OnlineQuiz
                 {
                     List<QuesAns> liQuesAns = new List<QuesAns>();
                     string strSQL_GetQuesAns = $"select * from QUESTION QE join ANSWER A on A.QuesID = QE.QuesID where exists (select * from QUIZ_QUESTION where QuizID = '{QuizID}')";
+
                     using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Program.connectionString))
                     {
                         var questionDictionary = new Dictionary<string, QuesAns>();
@@ -205,15 +204,14 @@ namespace OnlineQuiz
                         liQuesAns = list;
                     }// --- end of var list = connection.Query ---
 
+                    //Gửi List<QuesAns>
                     MessageBox.Show(liQuesAns[0].ToString());
                     BinaryFormatter bf = new BinaryFormatter();
                     bf.Serialize(ns, liQuesAns);
                     ns.Flush();
                     break;
                 }// end if
-
             } //end While
-
         }
 
         private void btn_quizresult_Click(object sender, EventArgs e)

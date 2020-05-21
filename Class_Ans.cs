@@ -10,8 +10,6 @@ namespace OnlineQuiz
     class Ans
     {
         public string AnsID { get; set; }
-        public string QuesID { get; set; }
         public string AnsContent { get; set; }
-        public bool isTrue { get; set; }
     }
 }
