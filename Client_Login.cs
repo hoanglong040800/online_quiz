@@ -17,11 +17,13 @@ namespace OnlineQuiz
 {
     public partial class client_login : Form
     {
-        Client cli=new Client();
+        Client cli = new Client();
         Quiz quiz = new Quiz();
-        List<QuesAns> liQuesAns = new List<QuesAns>();
+        public static List<QuesAns> liQuesAns = new List<QuesAns>();
+      
+       
 
-        public client_login()
+    public client_login()
         {
             InitializeComponent();
         }
@@ -71,7 +73,7 @@ namespace OnlineQuiz
 
                 BinaryFormatter bf = new BinaryFormatter();
                 quiz = (Quiz)bf.Deserialize(cli.ns);
-                MessageBox.Show(quiz.QuizID);
+                //MessageBox.Show(quiz.QuizID);
                 //kết thúc nhận QuizInfor
 
                 //bắt đầu nhận list<QuesAns>
@@ -79,7 +81,7 @@ namespace OnlineQuiz
                 sw.Flush();
                 BinaryFormatter bf1 = new BinaryFormatter();
                 liQuesAns = (List<QuesAns>)bf1.Deserialize(cli.ns);
-                MessageBox.Show(liQuesAns.ToString());
+                //MessageBox.Show(liQuesAns.ToString());
                 cli.CloseConnection();
                 //kết thúc nhận list<QuesAns>
                 

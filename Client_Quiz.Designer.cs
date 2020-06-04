@@ -39,11 +39,12 @@
             this.cb_ans2 = new System.Windows.Forms.CheckBox();
             this.cb_ans3 = new System.Windows.Forms.CheckBox();
             this.cb_ans4 = new System.Windows.Forms.CheckBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnPrevious = new System.Windows.Forms.Button();
+            this.btnNext = new System.Windows.Forms.Button();
             this.tb_curPage = new System.Windows.Forms.TextBox();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.lb_countdown = new System.Windows.Forms.Label();
+            this.btnSearch = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pb_ques)).BeginInit();
             this.SuspendLayout();
             // 
@@ -103,7 +104,6 @@
             // pb_ques
             // 
             this.pb_ques.BackColor = System.Drawing.Color.Transparent;
-            this.pb_ques.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pb_ques.BackgroundImage")));
             this.pb_ques.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pb_ques.Location = new System.Drawing.Point(42, 254);
             this.pb_ques.Margin = new System.Windows.Forms.Padding(10);
@@ -172,37 +172,39 @@
     "o a single layer";
             this.cb_ans4.UseVisualStyleBackColor = false;
             // 
-            // button1
+            // btnPrevious
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Chonburi", 10F);
-            this.button1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button1.Location = new System.Drawing.Point(652, 53);
-            this.button1.Margin = new System.Windows.Forms.Padding(10);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(81, 26);
-            this.button1.TabIndex = 41;
-            this.button1.Text = "Trước";
-            this.button1.UseVisualStyleBackColor = false;
+            this.btnPrevious.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.btnPrevious.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnPrevious.FlatAppearance.BorderSize = 0;
+            this.btnPrevious.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPrevious.Font = new System.Drawing.Font("Chonburi", 10F);
+            this.btnPrevious.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnPrevious.Location = new System.Drawing.Point(652, 53);
+            this.btnPrevious.Margin = new System.Windows.Forms.Padding(10);
+            this.btnPrevious.Name = "btnPrevious";
+            this.btnPrevious.Size = new System.Drawing.Size(81, 26);
+            this.btnPrevious.TabIndex = 41;
+            this.btnPrevious.Text = "Trước";
+            this.btnPrevious.UseVisualStyleBackColor = false;
+            this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
             // 
-            // button2
+            // btnNext
             // 
-            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Chonburi", 10F);
-            this.button2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button2.Location = new System.Drawing.Point(753, 53);
-            this.button2.Margin = new System.Windows.Forms.Padding(10);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(81, 26);
-            this.button2.TabIndex = 42;
-            this.button2.Text = "Sau";
-            this.button2.UseVisualStyleBackColor = false;
+            this.btnNext.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.btnNext.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnNext.FlatAppearance.BorderSize = 0;
+            this.btnNext.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNext.Font = new System.Drawing.Font("Chonburi", 10F);
+            this.btnNext.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnNext.Location = new System.Drawing.Point(753, 53);
+            this.btnNext.Margin = new System.Windows.Forms.Padding(10);
+            this.btnNext.Name = "btnNext";
+            this.btnNext.Size = new System.Drawing.Size(81, 26);
+            this.btnNext.TabIndex = 42;
+            this.btnNext.Text = "Sau";
+            this.btnNext.UseVisualStyleBackColor = false;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // tb_curPage
             // 
@@ -216,6 +218,7 @@
             this.tb_curPage.TabIndex = 43;
             this.tb_curPage.Text = "15";
             this.tb_curPage.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tb_curPage.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxTest_KeyDown);
             // 
             // timer
             // 
@@ -233,22 +236,39 @@
             this.lb_countdown.TabIndex = 44;
             this.lb_countdown.Text = "00:00:00";
             // 
+            // btnSearch
+            // 
+            this.btnSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.btnSearch.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSearch.FlatAppearance.BorderSize = 0;
+            this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSearch.Font = new System.Drawing.Font("Chonburi", 10F);
+            this.btnSearch.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnSearch.Location = new System.Drawing.Point(232, 38);
+            this.btnSearch.Margin = new System.Windows.Forms.Padding(10);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(72, 26);
+            this.btnSearch.TabIndex = 46;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = false;
+            // 
             // client_quiz
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(1184, 687);
+            this.Controls.Add(this.btnSearch);
+            this.Controls.Add(this.pb_ques);
             this.Controls.Add(this.lb_countdown);
             this.Controls.Add(this.tb_curPage);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnNext);
+            this.Controls.Add(this.btnPrevious);
             this.Controls.Add(this.cb_ans4);
             this.Controls.Add(this.cb_ans3);
             this.Controls.Add(this.cb_ans2);
             this.Controls.Add(this.cb_ans1);
             this.Controls.Add(this.btn_submit);
-            this.Controls.Add(this.pb_ques);
             this.Controls.Add(this.lb_ques);
             this.Controls.Add(this.lb_numsOfQues);
             this.Controls.Add(this.label1);
@@ -274,10 +294,11 @@
         private System.Windows.Forms.CheckBox cb_ans2;
         private System.Windows.Forms.CheckBox cb_ans3;
         private System.Windows.Forms.CheckBox cb_ans4;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnPrevious;
+        private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.TextBox tb_curPage;
         private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.Label lb_countdown;
+        private System.Windows.Forms.Button btnSearch;
     }
 }

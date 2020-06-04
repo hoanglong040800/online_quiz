@@ -160,7 +160,7 @@ namespace OnlineQuiz
                     {
                         quiz = connection.QuerySingle<Quiz>(strSQL_GetQuiz);
                     }
-                    MessageBox.Show(quiz.QuizID);
+                    //MessageBox.Show(quiz.QuizID);
                     BinaryFormatter bf = new BinaryFormatter();
                     bf.Serialize(ns, quiz);
                     ns.Flush();
@@ -205,7 +205,7 @@ namespace OnlineQuiz
                     }// --- end of var list = connection.Query ---
 
                     //Gửi List<QuesAns>
-                    MessageBox.Show(liQuesAns[0].ToString());
+                    //MessageBox.Show(liQuesAns[0].ToString());
                     BinaryFormatter bf = new BinaryFormatter();
                     bf.Serialize(ns, liQuesAns);
                     ns.Flush();
