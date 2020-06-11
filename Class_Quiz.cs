@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace OnlineQuiz
 {
     [Serializable]
-    class Quiz
+    public class Quiz
     {
         public string QuizID { get; set; }
         public string Title { get; set; }

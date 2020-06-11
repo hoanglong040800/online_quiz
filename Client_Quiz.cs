@@ -41,7 +41,6 @@ namespace OnlineQuiz
         {
             savedAns();
             sendClientAns();
-            
         }
                
         private void ThoiGian_Chan(int n)
@@ -229,16 +228,28 @@ namespace OnlineQuiz
         
         private void sendClientAns() {
             // gui list <ClientAns> cho server
-            TcpClient tcpClient = new TcpClient();
-            IPEndPoint remoteHost = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8080);
-            tcpClient.Connect(remoteHost);
-            BinaryFormatter bf = new BinaryFormatter();
-            NetworkStream ns = tcpClient.GetStream();
-           // foreach (var item in liClientAns)
-           // {
-                bf.Serialize(ns, liClientAns);
-         //   }
-            ns.Flush();
+            // khoi tao lai ket noi
+            Client client = new Client();
+
+            StreamReader sr = new StreamReader(client.ns);
+            StreamWriter sw = new StreamWriter(client.ns);
+            //gui thong bao va QuizID, StuUD
+            sw.WriteLine($"SUBMIT: {client_login.strQuizIDGlobal} {client_login.strStuIDGlobal}");
+            sw.Flush();
+
+            string strRespone = "";
+            while (true)
+            {
+                strRespone = sr.ReadLine();
+                if (strRespone == "CLIENTANS")
+                {
+                    BinaryFormatter bf = new BinaryFormatter();
+                    bf.Serialize(client.ns, liClientAns);
+                    client.ns.Flush();
+                    //gui liClientAns
+                    break;
+                }
+            }
 
             (new client_result()).Show();
             Close();
@@ -251,7 +262,7 @@ namespace OnlineQuiz
             savedAns();
             checkBoxOff();
             intCurPage++;
-            if (intCurPage == 4) checkAnsID(); 
+            //if (intCurPage == 4) checkAnsID(); 
             // (new client_quiz()).Show();
             // Close();
             loadQuesAns();
