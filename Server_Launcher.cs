@@ -60,30 +60,32 @@ namespace OnlineQuiz
                     if (LoginCheck(sr, sw))
                     {
                         string strQuizID = "";
-                        SendQuizInfor(sr, ns, out strQuizID);
-                        SendListQuesAns(sr, ns, strQuizID);
-                        sr.Close();
-                        sw.Close();
-                        ns.Close();
-                        tcpClient.Close();
+                        SendQuizInfo(sr, ns, out strQuizID);
+                        SendListQuesAns(sr, ns, strQuizID);  
                         break;
                     }
-
-                    return;
                 }
+
                 else if (strRequest.StartsWith("SUBMIT"))
                 {
-                    // strRequest = SUBMIT: QuiID StrUD
+                    //strRequest = SUBMIT: QuizID StrID
+                    string[] identify = strRequest.Split(' ');
                     sw.WriteLine("CLIENTANS");
+
                     //nhan liClientAns
                     BinaryFormatter bf = new BinaryFormatter();
                     List<ClientAns> liClientAns = (List<ClientAns>)bf.Deserialize(ns);
                     MessageBox.Show(liClientAns[0].AnsID.ToString());
-                    //
+
+                    CheckAns(liClientAns, identify[1], identify[2]);
                     break;
                 }
             }
 
+            sr.Close();
+            sw.Close();
+            ns.Close();
+            tcpClient.Close();
         }
 
         // Kiểm tra thông tin Login
@@ -107,6 +109,7 @@ namespace OnlineQuiz
 
                 if (reader.Read())
                     strSignal = "FOUND";
+
                 else
                 {
                     sw.WriteLine("LOGIN FAIL");
@@ -136,6 +139,7 @@ namespace OnlineQuiz
             return true;
         }
 
+        // Thêm thông tin user đang thực hiện quiz bảng result trước
         private void InsertIntoResult(string strStuID, string strQuizID)
         {
             using (SqlConnection sqlConnection = new SqlConnection(Program.connectionString))
@@ -164,7 +168,8 @@ namespace OnlineQuiz
             }
         }
 
-        private void SendQuizInfor(StreamReader sr, NetworkStream ns, out string strQuizID)
+        // Gửi thông tin đề
+        private void SendQuizInfo(StreamReader sr, NetworkStream ns, out string strQuizID)
         {
             while (true)
             {
@@ -177,16 +182,18 @@ namespace OnlineQuiz
                     {
                         quiz = connection.QuerySingle<Quiz>(strSQL_GetQuiz);
                     }
-                    //MessageBox.Show(quiz.QuizID);
+                    
                     BinaryFormatter bf = new BinaryFormatter();
                     bf.Serialize(ns, quiz);
                     ns.Flush();
                     break;
                 }
+
                 else MessageBox.Show("error");
             }
         }
 
+        // Gửi bộ câu hỏi và câu trả lời
         private void SendListQuesAns(StreamReader sr, NetworkStream ns, string QuizID)
         {
             string strSignal = "";
@@ -196,7 +203,7 @@ namespace OnlineQuiz
                 if (strSignal == "QUESANS")
                 {
                     List<QuesAns> liQuesAns = new List<QuesAns>();
-                    string strSQL_GetQuesAns = $"select * from QUESTION QE join ANSWER A on A.QuesID = QE.QuesID where exists (select * from QUIZ_QUESTION where QuizID = '{QuizID}')";
+                    string strSQL_GetQuesAns = $"select * from QUESTION QE join ANSWER A on A.QuesID = QE.QuesID where QE.QuesID in (select QuesID from QUIZ_QUESTION where QuizID = '{QuizID}')";
 
                     using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Program.connectionString))
                     {
@@ -229,6 +236,37 @@ namespace OnlineQuiz
                     break;
                 }// end if
             } //end While
+        }
+
+        // Kiểm tra câu trả lời và trả về kết quả
+        private void CheckAns(List<ClientAns> liClientAns, string strQuizID, string strStuID)
+        {
+            using (SqlConnection sqlConnection = new SqlConnection(Program.connectionString))
+            {
+                sqlConnection.Open();
+                SqlCommand cmd;
+                SqlDataReader sdr;
+                List<string> liAns = new List<string>();
+
+                // Lọc AnsID có IsTrue=1
+                cmd = new SqlCommand(@"select AnsID from ANSWER ans where QuesID in (select qe.QuesID from Question qe, QUIZ_QUESTION qze where qe.QuesID = qze.QuesID and qze.QuizID = @QuizID) and IsTrue = 1", sqlConnection);
+                cmd.Parameters.AddWithValue("@QuizID", strQuizID);
+                sdr = cmd.ExecuteReader();
+
+                // Thêm dữ liệu vào mảng
+                while(sdr.Read())
+                {
+                    liAns.Add(sdr.GetString(0));
+                }
+
+                // Dò AnsID ở liClientAns trong liAns
+                for (int i=0; i<5; i++)
+                {
+                    MessageBox.Show(liAns.Contains(liClientAns[i].AnsID).ToString());
+                }
+
+                sqlConnection.Close();
+            }
         }
 
         private void btn_quizresult_Click(object sender, EventArgs e)

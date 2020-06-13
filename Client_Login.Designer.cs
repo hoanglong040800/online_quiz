@@ -84,7 +84,7 @@
             this.tb_QuizID.Name = "tb_QuizID";
             this.tb_QuizID.Size = new System.Drawing.Size(200, 23);
             this.tb_QuizID.TabIndex = 9;
-            this.tb_QuizID.Text = "QZ02";
+            this.tb_QuizID.Text = "QZ01";
             this.tb_QuizID.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // btn_login

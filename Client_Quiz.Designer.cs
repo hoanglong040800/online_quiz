@@ -45,6 +45,7 @@
             this.rb_ans2 = new System.Windows.Forms.RadioButton();
             this.rb_ans3 = new System.Windows.Forms.RadioButton();
             this.rb_ans4 = new System.Windows.Forms.RadioButton();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pb_ques)).BeginInit();
             this.SuspendLayout();
             // 
@@ -184,13 +185,14 @@
             this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSearch.Font = new System.Drawing.Font("Chonburi", 10F);
             this.btnSearch.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnSearch.Location = new System.Drawing.Point(232, 38);
+            this.btnSearch.Location = new System.Drawing.Point(241, 38);
             this.btnSearch.Margin = new System.Windows.Forms.Padding(10);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(72, 26);
             this.btnSearch.TabIndex = 46;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = false;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // rb_ans1
             // 
@@ -248,12 +250,24 @@
     "o a single layer";
             this.rb_ans4.UseVisualStyleBackColor = false;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.Font = new System.Drawing.Font("Chonburi", 11F);
+            this.label2.Location = new System.Drawing.Point(191, 42);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(34, 18);
+            this.label2.TabIndex = 51;
+            this.label2.Text = "/20";
+            // 
             // client_quiz
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(1184, 687);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.pb_ques);
             this.Controls.Add(this.lb_countdown);
@@ -297,5 +311,6 @@
         private System.Windows.Forms.RadioButton rb_ans2;
         private System.Windows.Forms.RadioButton rb_ans3;
         private System.Windows.Forms.RadioButton rb_ans4;
+        private System.Windows.Forms.Label label2;
     }
 }

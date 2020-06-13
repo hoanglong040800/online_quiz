@@ -44,7 +44,7 @@ namespace OnlineQuiz
             // dưới 1 tiếng 
             if (intTime <= 60)
             {
-                if (intTime == 15) intTimeSecond = 54000;
+                     if (intTime == 15) intTimeSecond = 54000;
                 else if (intTime == 30) intTimeSecond = 108000;
                 else if (intTime == 45) intTimeSecond = 162000;
                 else if (intTime == 60) intTimeSecond = 216000;
@@ -144,14 +144,25 @@ namespace OnlineQuiz
         {
             if (e.KeyCode == Keys.Enter)
             {
-                button1_Click(this, new EventArgs());
+                btnSearch_Click(this, new EventArgs());
             }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            CheckBoxOff();
+            intCurPage = int.Parse(tb_curPage.Text);
+            LoadQuesAns();
+
+            if (intCurPage <= liClientAns.Count)
+                ShowCheckedAns();
         }
 
         private void btnPrevious_Click(object sender, EventArgs e)
         {
             intCurPage--;
             CheckBoxOff();
+            SavedAns();
             LoadQuesAns();
             ShowCheckedAns();
         }
@@ -163,16 +174,6 @@ namespace OnlineQuiz
             intCurPage++;
             if (intCurPage == 4) CheckAnsID();
                 LoadQuesAns();
-
-            if (intCurPage <= liClientAns.Count)
-                ShowCheckedAns();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            CheckBoxOff();
-            intCurPage = int.Parse(tb_curPage.Text);
-            LoadQuesAns();
 
             if (intCurPage <= liClientAns.Count)
                 ShowCheckedAns();
@@ -270,20 +271,32 @@ namespace OnlineQuiz
         // Gửi câu trả lời cho Server
         private void SendClientAns()
         {
-            TcpClient tcpClient = new TcpClient();
-            IPEndPoint remoteHost = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8080);
-            tcpClient.Connect(remoteHost);
+            // gui list <ClientAns> cho server
+            // khoi tao lai ket noi
+            Client client = new Client();
+            StreamReader sr = new StreamReader(client.ns);
+            StreamWriter sw = new StreamWriter(client.ns);
 
-            BinaryFormatter bf = new BinaryFormatter();
-            NetworkStream ns = tcpClient.GetStream();
+            //gui thong bao va QuizID, StuUD
+            sw.WriteLine($"SUBMIT: {client_login.strQuizIDGlobal} {client_login.strStuIDGlobal}");
+            sw.Flush();
 
-            bf.Serialize(ns, liClientAns);
-            ns.Flush();
+            string strRespone = "";
+            while (true)
+            {
+                strRespone = sr.ReadLine();
+                if (strRespone == "CLIENTANS")
+                {
+                    BinaryFormatter bf = new BinaryFormatter();
+                    bf.Serialize(client.ns, liClientAns);
+                    client.ns.Flush();
+                    break;
+                }
+            }
 
             (new client_result()).Show();
             Close();
         }
 
-       
     }
 }
