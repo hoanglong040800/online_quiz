@@ -18,12 +18,12 @@ namespace OnlineQuiz
     public partial class client_login : Form
     {
         Client cli = new Client();
-        Quiz quiz = new Quiz();
+        public static Quiz quiz = new Quiz();
         public static List<QuesAns> liQuesAns = new List<QuesAns>();
+        public static string strQuizIDGlobal;
+        public static string strStuIDGlobal;
       
-       
-
-    public client_login()
+        public client_login()
         {
             InitializeComponent();
         }
@@ -49,7 +49,9 @@ namespace OnlineQuiz
         private void btn_login_Click(object sender, EventArgs e)
         {
             string strStuID = tb_StuID.Text.Trim();
+            strStuIDGlobal = strStuID;
             string strQuizID = tb_QuizID.Text.Trim();
+            strQuizIDGlobal = strQuizID;
             StreamReader sr = new StreamReader(cli.ns);
             StreamWriter sw = new StreamWriter(cli.ns);
 
@@ -73,7 +75,7 @@ namespace OnlineQuiz
 
                 BinaryFormatter bf = new BinaryFormatter();
                 quiz = (Quiz)bf.Deserialize(cli.ns);
-                //MessageBox.Show(quiz.QuizID);
+
                 //kết thúc nhận QuizInfor
 
                 //bắt đầu nhận list<QuesAns>
@@ -81,7 +83,7 @@ namespace OnlineQuiz
                 sw.Flush();
                 BinaryFormatter bf1 = new BinaryFormatter();
                 liQuesAns = (List<QuesAns>)bf1.Deserialize(cli.ns);
-                //MessageBox.Show(liQuesAns.ToString());
+
                 cli.CloseConnection();
                 //kết thúc nhận list<QuesAns>
                 

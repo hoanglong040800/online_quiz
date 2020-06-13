@@ -51,22 +51,39 @@ namespace OnlineQuiz
             StreamWriter sw = new StreamWriter(tcpClient.GetStream());
             NetworkStream ns = tcpClient.GetStream();
             sw.AutoFlush = true;
-
-            if (sr.ReadLine() == "LOGIN")
+            string strRequest = "";
+            while (true)
             {
-                if (LoginCheck(sr, sw))
+                strRequest = sr.ReadLine();
+                if (strRequest == "LOGIN")
                 {
-                    string strQuizID = "";
-                    SendQuizInfor(sr, ns, out strQuizID);
-                    SendListQuesAns(sr, ns, strQuizID);
-                    sr.Close();
-                    sw.Close();
-                    ns.Close();
-                    tcpClient.Close();
-                }
+                    if (LoginCheck(sr, sw))
+                    {
+                        string strQuizID = "";
+                        SendQuizInfor(sr, ns, out strQuizID);
+                        SendListQuesAns(sr, ns, strQuizID);
+                        sr.Close();
+                        sw.Close();
+                        ns.Close();
+                        tcpClient.Close();
+                        break;
+                    }
 
-                return;
+                    return;
+                }
+                else if (strRequest.StartsWith("SUBMIT"))
+                {
+                    // strRequest = SUBMIT: QuiID StrUD
+                    sw.WriteLine("CLIENTANS");
+                    //nhan liClientAns
+                    BinaryFormatter bf = new BinaryFormatter();
+                    List<ClientAns> liClientAns = (List<ClientAns>)bf.Deserialize(ns);
+                    MessageBox.Show(liClientAns[0].AnsID.ToString());
+                    //
+                    break;
+                }
             }
+
         }
 
         // Kiểm tra thông tin Login
