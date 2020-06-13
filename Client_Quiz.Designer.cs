@@ -35,16 +35,16 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btn_submit = new System.Windows.Forms.Button();
             this.pb_ques = new System.Windows.Forms.PictureBox();
-            this.cb_ans1 = new System.Windows.Forms.CheckBox();
-            this.cb_ans2 = new System.Windows.Forms.CheckBox();
-            this.cb_ans3 = new System.Windows.Forms.CheckBox();
-            this.cb_ans4 = new System.Windows.Forms.CheckBox();
             this.btnPrevious = new System.Windows.Forms.Button();
             this.btnNext = new System.Windows.Forms.Button();
             this.tb_curPage = new System.Windows.Forms.TextBox();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.lb_countdown = new System.Windows.Forms.Label();
             this.btnSearch = new System.Windows.Forms.Button();
+            this.rb_ans1 = new System.Windows.Forms.RadioButton();
+            this.rb_ans2 = new System.Windows.Forms.RadioButton();
+            this.rb_ans3 = new System.Windows.Forms.RadioButton();
+            this.rb_ans4 = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.pb_ques)).BeginInit();
             this.SuspendLayout();
             // 
@@ -68,9 +68,9 @@
             this.lb_numsOfQues.Location = new System.Drawing.Point(180, 43);
             this.lb_numsOfQues.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.lb_numsOfQues.Name = "lb_numsOfQues";
-            this.lb_numsOfQues.Size = new System.Drawing.Size(37, 19);
+            this.lb_numsOfQues.Size = new System.Drawing.Size(14, 19);
             this.lb_numsOfQues.TabIndex = 26;
-            this.lb_numsOfQues.Text = "/20";
+            this.lb_numsOfQues.Text = " ";
             // 
             // label1
             // 
@@ -111,66 +111,6 @@
             this.pb_ques.Size = new System.Drawing.Size(543, 338);
             this.pb_ques.TabIndex = 28;
             this.pb_ques.TabStop = false;
-            // 
-            // cb_ans1
-            // 
-            this.cb_ans1.BackColor = System.Drawing.Color.Transparent;
-            this.cb_ans1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cb_ans1.Font = new System.Drawing.Font("Verdana", 10F);
-            this.cb_ans1.Location = new System.Drawing.Point(688, 141);
-            this.cb_ans1.Margin = new System.Windows.Forms.Padding(5, 20, 5, 20);
-            this.cb_ans1.Name = "cb_ans1";
-            this.cb_ans1.Size = new System.Drawing.Size(422, 73);
-            this.cb_ans1.TabIndex = 37;
-            this.cb_ans1.Text = "A network design where the access and distribution layers are collapsed into a si" +
-    "ngle layer.  A network design where the access and core layers are collapsed int" +
-    "o a single layer";
-            this.cb_ans1.UseVisualStyleBackColor = false;
-            // 
-            // cb_ans2
-            // 
-            this.cb_ans2.BackColor = System.Drawing.Color.Transparent;
-            this.cb_ans2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cb_ans2.Font = new System.Drawing.Font("Verdana", 10F);
-            this.cb_ans2.Location = new System.Drawing.Point(688, 254);
-            this.cb_ans2.Margin = new System.Windows.Forms.Padding(5, 20, 5, 20);
-            this.cb_ans2.Name = "cb_ans2";
-            this.cb_ans2.Size = new System.Drawing.Size(422, 73);
-            this.cb_ans2.TabIndex = 38;
-            this.cb_ans2.Text = "A network design where the access and distribution layers are collapsed into a si" +
-    "ngle layer.  A network design where the access and core layers are collapsed int" +
-    "o a single layer";
-            this.cb_ans2.UseVisualStyleBackColor = false;
-            // 
-            // cb_ans3
-            // 
-            this.cb_ans3.BackColor = System.Drawing.Color.Transparent;
-            this.cb_ans3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cb_ans3.Font = new System.Drawing.Font("Verdana", 10F);
-            this.cb_ans3.Location = new System.Drawing.Point(688, 367);
-            this.cb_ans3.Margin = new System.Windows.Forms.Padding(5, 20, 5, 20);
-            this.cb_ans3.Name = "cb_ans3";
-            this.cb_ans3.Size = new System.Drawing.Size(422, 73);
-            this.cb_ans3.TabIndex = 39;
-            this.cb_ans3.Text = "A network design where the access and distribution layers are collapsed into a si" +
-    "ngle layer.  A network design where the access and core layers are collapsed int" +
-    "o a single layer";
-            this.cb_ans3.UseVisualStyleBackColor = false;
-            // 
-            // cb_ans4
-            // 
-            this.cb_ans4.BackColor = System.Drawing.Color.Transparent;
-            this.cb_ans4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cb_ans4.Font = new System.Drawing.Font("Verdana", 10F);
-            this.cb_ans4.Location = new System.Drawing.Point(688, 480);
-            this.cb_ans4.Margin = new System.Windows.Forms.Padding(5, 20, 5, 20);
-            this.cb_ans4.Name = "cb_ans4";
-            this.cb_ans4.Size = new System.Drawing.Size(422, 73);
-            this.cb_ans4.TabIndex = 40;
-            this.cb_ans4.Text = "A network design where the access and distribution layers are collapsed into a si" +
-    "ngle layer.  A network design where the access and core layers are collapsed int" +
-    "o a single layer";
-            this.cb_ans4.UseVisualStyleBackColor = false;
             // 
             // btnPrevious
             // 
@@ -252,6 +192,62 @@
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = false;
             // 
+            // rb_ans1
+            // 
+            this.rb_ans1.BackColor = System.Drawing.Color.Transparent;
+            this.rb_ans1.Font = new System.Drawing.Font("Verdana", 10F);
+            this.rb_ans1.Location = new System.Drawing.Point(688, 127);
+            this.rb_ans1.Name = "rb_ans1";
+            this.rb_ans1.Size = new System.Drawing.Size(410, 104);
+            this.rb_ans1.TabIndex = 47;
+            this.rb_ans1.TabStop = true;
+            this.rb_ans1.Text = "A network design where the access and distribution layers are collapsed into a si" +
+    "ngle layer.  A network design where the access and core layers are collapsed int" +
+    "o a single layer";
+            this.rb_ans1.UseVisualStyleBackColor = false;
+            // 
+            // rb_ans2
+            // 
+            this.rb_ans2.BackColor = System.Drawing.Color.Transparent;
+            this.rb_ans2.Font = new System.Drawing.Font("Verdana", 10F);
+            this.rb_ans2.Location = new System.Drawing.Point(688, 240);
+            this.rb_ans2.Name = "rb_ans2";
+            this.rb_ans2.Size = new System.Drawing.Size(410, 104);
+            this.rb_ans2.TabIndex = 48;
+            this.rb_ans2.TabStop = true;
+            this.rb_ans2.Text = "A network design where the access and distribution layers are collapsed into a si" +
+    "ngle layer.  A network design where the access and core layers are collapsed int" +
+    "o a single layer";
+            this.rb_ans2.UseVisualStyleBackColor = false;
+            // 
+            // rb_ans3
+            // 
+            this.rb_ans3.BackColor = System.Drawing.Color.Transparent;
+            this.rb_ans3.Font = new System.Drawing.Font("Verdana", 10F);
+            this.rb_ans3.Location = new System.Drawing.Point(688, 350);
+            this.rb_ans3.Name = "rb_ans3";
+            this.rb_ans3.Size = new System.Drawing.Size(410, 104);
+            this.rb_ans3.TabIndex = 49;
+            this.rb_ans3.TabStop = true;
+            this.rb_ans3.Text = "A network design where the access and distribution layers are collapsed into a si" +
+    "ngle layer.  A network design where the access and core layers are collapsed int" +
+    "o a single layer";
+            this.rb_ans3.UseVisualStyleBackColor = false;
+            // 
+            // rb_ans4
+            // 
+            this.rb_ans4.BackColor = System.Drawing.Color.Transparent;
+            this.rb_ans4.Font = new System.Drawing.Font("Verdana", 10F);
+            this.rb_ans4.Location = new System.Drawing.Point(688, 463);
+            this.rb_ans4.Name = "rb_ans4";
+            this.rb_ans4.Size = new System.Drawing.Size(410, 104);
+            this.rb_ans4.TabIndex = 50;
+            this.rb_ans4.TabStop = true;
+            this.rb_ans4.Text = "A network design where the access and distribution layers are collapsed into a si" +
+    "ngle layer.  A network design where the access and core layers are collapsed int" +
+    "o a single layer";
+            this.rb_ans4.UseVisualStyleBackColor = false;
+            // 
             // client_quiz
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -264,19 +260,20 @@
             this.Controls.Add(this.tb_curPage);
             this.Controls.Add(this.btnNext);
             this.Controls.Add(this.btnPrevious);
-            this.Controls.Add(this.cb_ans4);
-            this.Controls.Add(this.cb_ans3);
-            this.Controls.Add(this.cb_ans2);
-            this.Controls.Add(this.cb_ans1);
             this.Controls.Add(this.btn_submit);
             this.Controls.Add(this.lb_ques);
             this.Controls.Add(this.lb_numsOfQues);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.rb_ans1);
+            this.Controls.Add(this.rb_ans2);
+            this.Controls.Add(this.rb_ans3);
+            this.Controls.Add(this.rb_ans4);
             this.MaximumSize = new System.Drawing.Size(1200, 726);
             this.MinimumSize = new System.Drawing.Size(1200, 726);
             this.Name = "client_quiz";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "      ";
             this.Load += new System.EventHandler(this.client_quiz_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pb_ques)).EndInit();
             this.ResumeLayout(false);
@@ -290,15 +287,15 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btn_submit;
         private System.Windows.Forms.PictureBox pb_ques;
-        private System.Windows.Forms.CheckBox cb_ans1;
-        private System.Windows.Forms.CheckBox cb_ans2;
-        private System.Windows.Forms.CheckBox cb_ans3;
-        private System.Windows.Forms.CheckBox cb_ans4;
         private System.Windows.Forms.Button btnPrevious;
         private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.TextBox tb_curPage;
         private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.Label lb_countdown;
         private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.RadioButton rb_ans1;
+        private System.Windows.Forms.RadioButton rb_ans2;
+        private System.Windows.Forms.RadioButton rb_ans3;
+        private System.Windows.Forms.RadioButton rb_ans4;
     }
 }

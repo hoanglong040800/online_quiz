@@ -43,10 +43,10 @@
             // 
             this.lb_studentID.AutoSize = true;
             this.lb_studentID.BackColor = System.Drawing.Color.Transparent;
-            this.lb_studentID.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.lb_studentID.Location = new System.Drawing.Point(159, 211);
+            this.lb_studentID.Font = new System.Drawing.Font("Chonburi", 10F);
+            this.lb_studentID.Location = new System.Drawing.Point(161, 211);
             this.lb_studentID.Name = "lb_studentID";
-            this.lb_studentID.Size = new System.Drawing.Size(21, 17);
+            this.lb_studentID.Size = new System.Drawing.Size(24, 17);
             this.lb_studentID.TabIndex = 4;
             this.lb_studentID.Text = "ID";
             // 
@@ -54,7 +54,7 @@
             // 
             this.tb_StuID.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.tb_StuID.BackColor = System.Drawing.Color.White;
-            this.tb_StuID.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.tb_StuID.Font = new System.Drawing.Font("Chonburi", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_StuID.Location = new System.Drawing.Point(71, 236);
             this.tb_StuID.Margin = new System.Windows.Forms.Padding(10, 10, 10, 15);
             this.tb_StuID.Name = "tb_StuID";
@@ -67,10 +67,10 @@
             // 
             this.lb_code.AutoSize = true;
             this.lb_code.BackColor = System.Drawing.Color.Transparent;
-            this.lb_code.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.lb_code.Location = new System.Drawing.Point(116, 292);
+            this.lb_code.Font = new System.Drawing.Font("Chonburi", 10F);
+            this.lb_code.Location = new System.Drawing.Point(124, 292);
             this.lb_code.Name = "lb_code";
-            this.lb_code.Size = new System.Drawing.Size(94, 17);
+            this.lb_code.Size = new System.Drawing.Size(111, 17);
             this.lb_code.TabIndex = 7;
             this.lb_code.Text = "Mã Code quiz";
             // 
@@ -78,7 +78,7 @@
             // 
             this.tb_QuizID.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.tb_QuizID.BackColor = System.Drawing.Color.White;
-            this.tb_QuizID.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.tb_QuizID.Font = new System.Drawing.Font("Chonburi", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_QuizID.Location = new System.Drawing.Point(71, 317);
             this.tb_QuizID.Margin = new System.Windows.Forms.Padding(10, 10, 10, 15);
             this.tb_QuizID.Name = "tb_QuizID";
@@ -92,7 +92,7 @@
             this.btn_login.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.btn_login.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_login.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_login.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btn_login.Font = new System.Drawing.Font("Chonburi", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_login.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.btn_login.Location = new System.Drawing.Point(117, 420);
             this.btn_login.Name = "btn_login";
@@ -117,12 +117,12 @@
             // 
             this.lb_OnlineQuiz.AutoSize = true;
             this.lb_OnlineQuiz.BackColor = System.Drawing.Color.Transparent;
-            this.lb_OnlineQuiz.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F);
+            this.lb_OnlineQuiz.Font = new System.Drawing.Font("Chonburi", 24.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_OnlineQuiz.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.lb_OnlineQuiz.Location = new System.Drawing.Point(52, 100);
+            this.lb_OnlineQuiz.Location = new System.Drawing.Point(61, 111);
             this.lb_OnlineQuiz.Margin = new System.Windows.Forms.Padding(0);
             this.lb_OnlineQuiz.Name = "lb_OnlineQuiz";
-            this.lb_OnlineQuiz.Size = new System.Drawing.Size(195, 39);
+            this.lb_OnlineQuiz.Size = new System.Drawing.Size(235, 39);
             this.lb_OnlineQuiz.TabIndex = 23;
             this.lb_OnlineQuiz.Text = "Online Quiz";
             // 
