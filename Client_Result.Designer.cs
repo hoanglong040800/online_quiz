@@ -41,6 +41,7 @@
             this.pb_uit = new System.Windows.Forms.PictureBox();
             this.lb_OnlineQuiz = new System.Windows.Forms.Label();
             this.lb_title = new System.Windows.Forms.Label();
+            this.lb_mins = new System.Windows.Forms.Label();
             this.lb_time = new System.Windows.Forms.Label();
             this.gb_result.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pb_uit)).BeginInit();
@@ -59,6 +60,7 @@
             this.btn_exit.TabIndex = 29;
             this.btn_exit.Text = "Thoát";
             this.btn_exit.UseVisualStyleBackColor = false;
+            this.btn_exit.Click += new System.EventHandler(this.btn_exit_Click);
             // 
             // gb_result
             // 
@@ -71,7 +73,7 @@
             this.gb_result.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.gb_result.Font = new System.Drawing.Font("Chonburi", 12F);
             this.gb_result.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.gb_result.Location = new System.Drawing.Point(47, 279);
+            this.gb_result.Location = new System.Drawing.Point(47, 298);
             this.gb_result.Name = "gb_result";
             this.gb_result.Size = new System.Drawing.Size(248, 96);
             this.gb_result.TabIndex = 35;
@@ -85,9 +87,9 @@
             this.lb_Score.ForeColor = System.Drawing.SystemColors.Desktop;
             this.lb_Score.Location = new System.Drawing.Point(151, 65);
             this.lb_Score.Name = "lb_Score";
-            this.lb_Score.Size = new System.Drawing.Size(24, 15);
+            this.lb_Score.Size = new System.Drawing.Size(45, 15);
             this.lb_Score.TabIndex = 43;
-            this.lb_Score.Text = "10";
+            this.lb_Score.Text = "10/10";
             // 
             // lb_CorrectAnswer
             // 
@@ -151,24 +153,36 @@
             // 
             this.lb_title.BackColor = System.Drawing.Color.Transparent;
             this.lb_title.Font = new System.Drawing.Font("Chonburi", 12F);
-            this.lb_title.Location = new System.Drawing.Point(0, 171);
+            this.lb_title.Location = new System.Drawing.Point(42, 171);
             this.lb_title.Margin = new System.Windows.Forms.Padding(0);
             this.lb_title.Name = "lb_title";
-            this.lb_title.Size = new System.Drawing.Size(342, 50);
+            this.lb_title.Size = new System.Drawing.Size(258, 62);
             this.lb_title.TabIndex = 38;
             this.lb_title.Text = "Kiểm tra cuối kì";
             this.lb_title.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lb_mins
+            // 
+            this.lb_mins.BackColor = System.Drawing.Color.Transparent;
+            this.lb_mins.Font = new System.Drawing.Font("Chonburi", 10F);
+            this.lb_mins.Location = new System.Drawing.Point(176, 242);
+            this.lb_mins.Margin = new System.Windows.Forms.Padding(0);
+            this.lb_mins.Name = "lb_mins";
+            this.lb_mins.Size = new System.Drawing.Size(35, 24);
+            this.lb_mins.TabIndex = 44;
+            this.lb_mins.Text = "120";
+            this.lb_mins.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lb_time
             // 
             this.lb_time.BackColor = System.Drawing.Color.Transparent;
             this.lb_time.Font = new System.Drawing.Font("Chonburi", 10F);
-            this.lb_time.Location = new System.Drawing.Point(0, 223);
+            this.lb_time.Location = new System.Drawing.Point(1, 242);
             this.lb_time.Margin = new System.Windows.Forms.Padding(0);
             this.lb_time.Name = "lb_time";
             this.lb_time.Size = new System.Drawing.Size(342, 24);
-            this.lb_time.TabIndex = 39;
-            this.lb_time.Text = "Thời gian: 120 phút";
+            this.lb_time.TabIndex = 43;
+            this.lb_time.Text = "Thời gian:         phút";
             this.lb_time.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // client_result
@@ -178,6 +192,7 @@
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(344, 501);
+            this.Controls.Add(this.lb_mins);
             this.Controls.Add(this.lb_time);
             this.Controls.Add(this.lb_title);
             this.Controls.Add(this.pb_uit);
@@ -204,10 +219,11 @@
         private System.Windows.Forms.PictureBox pb_uit;
         private System.Windows.Forms.Label lb_OnlineQuiz;
         private System.Windows.Forms.Label lb_title;
-        private System.Windows.Forms.Label lb_time;
         private System.Windows.Forms.Label lb2;
         private System.Windows.Forms.Label lb1;
         private System.Windows.Forms.Label lb_Score;
         private System.Windows.Forms.Label lb_CorrectAnswer;
+        private System.Windows.Forms.Label lb_mins;
+        private System.Windows.Forms.Label lb_time;
     }
 }

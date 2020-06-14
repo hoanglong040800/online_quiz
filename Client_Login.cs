@@ -1,16 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Net;
-using System.Net.Sockets;
 using System.IO;
-using System.Threading;
 using System.Runtime.Serialization.Formatters.Binary;
 
 namespace OnlineQuiz
@@ -66,30 +57,26 @@ namespace OnlineQuiz
             sw.WriteLine(strQuizID);
             sw.Flush();
 
-
             if (LoginListener(sr))
             {
                 //Gửi QuizID
                 sw.WriteLine(strQuizID);
                 sw.Flush();
 
+                // Nhận QuizInfo
                 BinaryFormatter bf = new BinaryFormatter();
                 quiz = (Quiz)bf.Deserialize(cli.ns);
 
-                //kết thúc nhận QuizInfor
 
-                //bắt đầu nhận list<QuesAns>
+                // nhận list<QuesAns>
                 sw.WriteLine("QUESANS");
                 sw.Flush();
                 BinaryFormatter bf1 = new BinaryFormatter();
                 liQuesAns = (List<QuesAns>)bf1.Deserialize(cli.ns);
-
                 cli.CloseConnection();
-                //kết thúc nhận list<QuesAns>
-                
+
                 (new client_quizinfo()).Show();
                 Close();
-                
             }
         }
     }

@@ -1,30 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Net;
-using System.Net.Sockets;
 
 namespace OnlineQuiz
 {
 
-    public partial class client_quiz : Form
+    public partial class client_quiz:Form
     {
-       
+
         int intTimeSecond;
         int intTime;
         bool boolCheckTimeOut = false;
         int intCurPage = 1;
         List<ClientAns> liClientAns = new List<ClientAns>();
 
-        public client_quiz()
+        public client_quiz ()
         {
             InitializeComponent();
             intTime = 3;
@@ -33,8 +25,7 @@ namespace OnlineQuiz
 
         // ---------------- Timer --------------
 
-        // chon quick cho intTime
-        private void client_quiz_Load(object sender, EventArgs e)
+        private void client_quiz_Load (object sender , EventArgs e)
         {
             timer = new Timer();
             timer.Interval = 3;
@@ -44,26 +35,33 @@ namespace OnlineQuiz
             // dưới 1 tiếng 
             if (intTime <= 60)
             {
-                     if (intTime == 15) intTimeSecond = 54000;
-                else if (intTime == 30) intTimeSecond = 108000;
-                else if (intTime == 45) intTimeSecond = 162000;
-                else if (intTime == 60) intTimeSecond = 216000;
-                else if (intTime == 10) intTimeSecond = 36000;
-                else if (intTime == 20) intTimeSecond = 72000;
+                if (intTime == 15)
+                    intTimeSecond = 54000;
+                else if (intTime == 30)
+                    intTimeSecond = 108000;
+                else if (intTime == 45)
+                    intTimeSecond = 162000;
+                else if (intTime == 60)
+                    intTimeSecond = 216000;
+                else if (intTime == 10)
+                    intTimeSecond = 36000;
+                else if (intTime == 20)
+                    intTimeSecond = 72000;
 
             }
 
             // giả sử đè thi 90 phút , 120 phút thi se xet , dep hay xau
             else
             {
-                if (intTime % 60 == 0) intTimeSecond = 216000;
+                if (intTime % 60 == 0)
+                    intTimeSecond = 216000;
 
                 else
                 {
-                    if ((intTime % 60) < 30) // 1 tieng 15 phut hoac 2 tieng 15 phut                    
+                    if (( intTime % 60 ) < 30) // 1 tieng 15 phut hoac 2 tieng 15 phut                    
                         intTimeSecond = 54000;
 
-                    else if ((intTime % 60) > 30) // 1 tieng 45 phut hoac 2 tieng 45 phut                 
+                    else if (( intTime % 60 ) > 30) // 1 tieng 45 phut hoac 2 tieng 45 phut                 
                         intTimeSecond = 162000;
 
                     else
@@ -74,7 +72,7 @@ namespace OnlineQuiz
             LoadQuesAns();
         }
 
-        private void timer_Tick(object sender, EventArgs e)
+        private void timer_Tick (object sender , EventArgs e)
         {
             intTimeSecond--;
             if (intTime % 60 == 0 || intTime < 60)
@@ -90,19 +88,19 @@ namespace OnlineQuiz
             }
         }
 
-        private void ThoiGian_Chan(int n)
+        private void ThoiGian_Chan (int n)
         {
             int hour = n / 60;
             if (hour <= 1)
-                lb_countdown.Text = "00 :" + intTimeSecond / 3600 + " : " + ((intTimeSecond % 3600) / 60 >= 10 ? ((intTimeSecond % 3600) / 60).ToString() : "0" + ((intTimeSecond % 3600) / 60).ToString());
+                lb_countdown.Text = "00 :" + intTimeSecond / 3600 + " : " + ( ( intTimeSecond % 3600 ) / 60 >= 10 ? ( ( intTimeSecond % 3600 ) / 60 ).ToString() : "0" + ( ( intTimeSecond % 3600 ) / 60 ).ToString() );
             else
             {
                 if (intTimeSecond * hour / 216000 < 1)
-                    lb_countdown.Text = "00 : " + intTimeSecond / 3600 + " : " + ((intTimeSecond % 3600) / 60 >= 10 ? ((intTimeSecond % 3600) / 60).ToString() : "0" + ((intTimeSecond % 3600) / 60).ToString());
+                    lb_countdown.Text = "00 : " + intTimeSecond / 3600 + " : " + ( ( intTimeSecond % 3600 ) / 60 >= 10 ? ( ( intTimeSecond % 3600 ) / 60 ).ToString() : "0" + ( ( intTimeSecond % 3600 ) / 60 ).ToString() );
                 else
-                    lb_countdown.Text = intTimeSecond * hour / 216000 + " : " + intTimeSecond / 3600 + " : " + ((intTimeSecond % 3600) / 60 >= 10 ? ((intTimeSecond % 3600) / 60).ToString() : "0" + ((intTimeSecond % 3600) / 60).ToString());
+                    lb_countdown.Text = intTimeSecond * hour / 216000 + " : " + intTimeSecond / 3600 + " : " + ( ( intTimeSecond % 3600 ) / 60 >= 10 ? ( ( intTimeSecond % 3600 ) / 60 ).ToString() : "0" + ( ( intTimeSecond % 3600 ) / 60 ).ToString() );
             }
-            if (intTimeSecond == 59 )
+            if (intTimeSecond == 59)
             {
                 hour--;
                 if (hour <= 0)
@@ -110,45 +108,50 @@ namespace OnlineQuiz
                     timer.Stop();
                     boolCheckTimeOut = true;
                 }
-                else intTimeSecond = 216000;
+                else
+                    intTimeSecond = 216000;
             }
         }
 
-        private void ThoiGian_Le(int n)
+        private void ThoiGian_Le (int n)
         {
             int hour = n / 60;
             if (n <= 60)
-                lb_countdown.Text = "00 :" + intTimeSecond / 3600 + " : " + ((intTimeSecond % 3600) / 60 >= 10 ? ((intTimeSecond % 3600) / 60).ToString() : "0" + ((intTimeSecond % 3600) / 60).ToString());
+                lb_countdown.Text = "00 :" + intTimeSecond / 3600 + " : " + ( ( intTimeSecond % 3600 ) / 60 >= 10 ? ( ( intTimeSecond % 3600 ) / 60 ).ToString() : "0" + ( ( intTimeSecond % 3600 ) / 60 ).ToString() );
 
             else
-                lb_countdown.Text = hour + " : " + intTimeSecond / 3600 + " : " + ((intTimeSecond % 3600) / 60 >= 10 ? ((intTimeSecond % 3600) / 60).ToString() : "0" + ((intTimeSecond % 3600) / 60).ToString());
+                lb_countdown.Text = hour + " : " + intTimeSecond / 3600 + " : " + ( ( intTimeSecond % 3600 ) / 60 >= 10 ? ( ( intTimeSecond % 3600 ) / 60 ).ToString() : "0" + ( ( intTimeSecond % 3600 ) / 60 ).ToString() );
 
             if (intTimeSecond == 59)
             {
-                if ((intTime % 60) < 30) intTime -= 15;
-                else if ((intTime % 60) > 30) intTime -= 45;
-                else intTime -= 30;
+                if (( intTime % 60 ) < 30)
+                    intTime -= 15;
+                else if (( intTime % 60 ) > 30)
+                    intTime -= 45;
+                else
+                    intTime -= 30;
 
                 if (intTime < 60)
                 {
                     timer.Stop();
                     boolCheckTimeOut = true;
                 }
-                else intTimeSecond = 216000;
+                else
+                    intTimeSecond = 216000;
             }
         }
 
         // -------------- Thay đổi số trang ------------------
 
-        private void textBoxTest_KeyDown(object sender, KeyEventArgs e)
+        private void textBoxTest_KeyDown (object sender , KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                btnSearch_Click(this, new EventArgs());
+                btnSearch_Click(this , new EventArgs());
             }
         }
 
-        private void btnSearch_Click(object sender, EventArgs e)
+        private void btnSearch_Click (object sender , EventArgs e)
         {
             CheckBoxOff();
             intCurPage = int.Parse(tb_curPage.Text);
@@ -158,7 +161,7 @@ namespace OnlineQuiz
                 ShowCheckedAns();
         }
 
-        private void btnPrevious_Click(object sender, EventArgs e)
+        private void btnPrevious_Click (object sender , EventArgs e)
         {
             intCurPage--;
             CheckBoxOff();
@@ -167,19 +170,20 @@ namespace OnlineQuiz
             ShowCheckedAns();
         }
 
-        private void btnNext_Click(object sender, EventArgs e)
+        private void btnNext_Click (object sender , EventArgs e)
         {
             SavedAns();
             CheckBoxOff();
             intCurPage++;
-            if (intCurPage == 4) CheckAnsID();
-                LoadQuesAns();
+            if (intCurPage == 4)
+                CheckAnsID();
+            LoadQuesAns();
 
             if (intCurPage <= liClientAns.Count)
                 ShowCheckedAns();
         }
 
-        private void CheckBoxOff()
+        private void CheckBoxOff ()
         {
             rb_ans1.Checked = false;
             rb_ans2.Checked = false;
@@ -188,7 +192,7 @@ namespace OnlineQuiz
         }
 
         // Tải câu hỏi và đáp án khi đổi trang
-        private void LoadQuesAns()
+        private void LoadQuesAns ()
         {
             lb_ques.Text = client_login.liQuesAns[intCurPage - 1].QuesContent;
             rb_ans1.Text = client_login.liQuesAns[intCurPage - 1].Answers[0].AnsContent;
@@ -205,10 +209,10 @@ namespace OnlineQuiz
             }
         }
 
-        private void CheckAnsID()
+        private void CheckAnsID ()
         {
             string path = @"E:\ansID.txt";
-            using (StreamWriter sw = new StreamWriter(path) )
+            using (StreamWriter sw = new StreamWriter(path))
             {
                 int i = 0;
                 while (i < liClientAns.Count)
@@ -219,17 +223,21 @@ namespace OnlineQuiz
             }
         }
 
-        private void ShowCheckedAns()
+        private void ShowCheckedAns ()
         {
-                 if (liClientAns[intCurPage - 1].AnsID == client_login.liQuesAns[intCurPage - 1].Answers[0].AnsID) rb_ans1.Checked = true ;
-            else if (liClientAns[intCurPage - 1].AnsID == client_login.liQuesAns[intCurPage - 1].Answers[1].AnsID) rb_ans2.Checked = true;
-            else if (liClientAns[intCurPage - 1].AnsID == client_login.liQuesAns[intCurPage - 1].Answers[2].AnsID) rb_ans3.Checked = true;
-            else if (liClientAns[intCurPage - 1].AnsID == client_login.liQuesAns[intCurPage - 1].Answers[3].AnsID) rb_ans4.Checked = true;
+            if (liClientAns[intCurPage - 1].AnsID == client_login.liQuesAns[intCurPage - 1].Answers[0].AnsID)
+                rb_ans1.Checked = true;
+            else if (liClientAns[intCurPage - 1].AnsID == client_login.liQuesAns[intCurPage - 1].Answers[1].AnsID)
+                rb_ans2.Checked = true;
+            else if (liClientAns[intCurPage - 1].AnsID == client_login.liQuesAns[intCurPage - 1].Answers[2].AnsID)
+                rb_ans3.Checked = true;
+            else if (liClientAns[intCurPage - 1].AnsID == client_login.liQuesAns[intCurPage - 1].Answers[3].AnsID)
+                rb_ans4.Checked = true;
         }
 
         // ------------------- Nộp và gửi kết quả cho server -------------------
 
-        private void btn_submit_Click(object sender, EventArgs e)
+        private void btn_submit_Click (object sender , EventArgs e)
         {
             SavedAns();
             SendClientAns();
@@ -256,26 +264,26 @@ namespace OnlineQuiz
 
             ClientAns ca = new ClientAns
             {
-                QuesID = quesID,
+                QuesID = quesID ,
                 AnsID = ansID
             };
 
             // xoá những phần tử bị trùng
             for (int i = 0; i < liClientAns.Count; i++)
             {
-                if (ca.QuesID == liClientAns[i].QuesID) liClientAns.RemoveAt(i);
+                if (ca.QuesID == liClientAns[i].QuesID)
+                    liClientAns.RemoveAt(i);
             }
             liClientAns.Add(ca);
         }
 
         // Gửi câu trả lời cho Server
-        private void SendClientAns()
+        private void SendClientAns ()
         {
             // gui list <ClientAns> cho server
-            // khoi tao lai ket noi
-            Client client = new Client();
-            StreamReader sr = new StreamReader(client.ns);
-            StreamWriter sw = new StreamWriter(client.ns);
+            Client cli      = new Client();
+            StreamReader sr = new StreamReader(cli.ns);
+            StreamWriter sw = new StreamWriter(cli.ns);
 
             //gui thong bao va QuizID, StuUD
             sw.WriteLine($"SUBMIT: {client_login.strQuizIDGlobal} {client_login.strStuIDGlobal}");
@@ -288,14 +296,20 @@ namespace OnlineQuiz
                 if (strRespone == "CLIENTANS")
                 {
                     BinaryFormatter bf = new BinaryFormatter();
-                    bf.Serialize(client.ns, liClientAns);
-                    client.ns.Flush();
+                    bf.Serialize(cli.ns , liClientAns);
+                    cli.ns.Flush();
                     break;
                 }
             }
 
-            (new client_result()).Show();
-            Close();
+            // Nhận kết quả
+            if (sr.ReadLine() == "FINISH GRADED")
+            {
+                (new client_result( int.Parse(sr.ReadLine()) , float.Parse(sr.ReadLine()) )).Show();
+                cli.CloseConnection();
+                timer.Stop();
+                Close();
+            }
         }
 
     }

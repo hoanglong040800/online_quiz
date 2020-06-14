@@ -1,16 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Net;
-using System.Net.Sockets;
-using System.IO;
-using System.Threading;
 
 namespace OnlineQuiz
 {
@@ -20,6 +9,8 @@ namespace OnlineQuiz
         public client_quizinfo()
         {
             InitializeComponent();
+            lb_title.Text = client_login.quiz.Title;
+            lb_mins.Text  = client_login.quiz.QuizTime.ToString();
         }
 
         private void btn_start_Click(object sender, EventArgs e)
