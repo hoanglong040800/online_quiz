@@ -234,7 +234,7 @@ namespace OnlineQuiz
             } //end While
         }
 
-        // Kiểm tra câu trả lời và trả về kết quả
+        // Kiểm tra câu trả lời và trả về kết quả 
         private void CheckAns (List<ClientAns> liClientAns , StreamWriter sw, string strQuizID , string strStuID)
         {
             using (SqlConnection sqlConnection = new SqlConnection(Program.connectionString))
