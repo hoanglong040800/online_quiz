@@ -14,13 +14,24 @@ namespace OnlineQuiz
         int intTime;
         bool boolCheckTimeOut = false;
         int intCurPage = 1;
-        List<ClientAns> liClientAns = new List<ClientAns>();
+        List<ClientAns> liClientAns = new List<ClientAns>(client_login.quiz.QuesNum);
 
         public client_quiz ()
         {
             InitializeComponent();
-            intTime = 3;
+            intTime = client_login.quiz.QuizTime ;
             intTimeSecond = intTime * 3600;
+            label2.Text = "/" + client_login.quiz.QuesNum;
+
+            // quá trình khỏi tạo liClientAns , gán mọi phần tử = "" hết vì thằng nhóm trưởng yêu cầu  
+            ClientAns ca = new ClientAns();
+            ca.AnsID = "";
+            ca.QuesID = "";
+            for(int i = 0; i< client_login.quiz.QuesNum; i++)
+            {
+                liClientAns.Add(ca);
+            }    
+
         }
 
         // ---------------- Timer --------------
@@ -163,24 +174,76 @@ namespace OnlineQuiz
 
         private void btnPrevious_Click (object sender , EventArgs e)
         {
-            intCurPage--;
-            CheckBoxOff();
-            SavedAns();
-            LoadQuesAns();
-            ShowCheckedAns();
+            
+            try
+            {
+                // số câu phải hợp lệ thì mới lưu kết quả 
+                if (intCurPage <= client_login.quiz.QuesNum && intCurPage >= 1 )
+                    SavedAns();
+                intCurPage--;
+
+                if (intCurPage < 1) { 
+                    intCurPage++; 
+                    throw new Exception(); 
+                }
+                // những câu đã làm thì load câu đó và load câu trả lời đã làm 
+                // ở đây ko đi tới rẽ nhánh  IF thứ 3 đâu 
+                else if (intCurPage <= liClientAns.Count)
+                {
+                    LoadQuesAns();
+                    ShowCheckedAns();
+                }
+/*
+                //    if (intCurPage  CheckBoxOff();
+                // nhung cau chua lam` 
+                else
+                {
+                    CheckBoxOff();
+                    LoadQuesAns();
+                }
+                */
+            }
+            catch
+            {
+                MessageBox.Show("You have not finished your test yet  . Please do it !!! ");
+            }
+            
         }
 
         private void btnNext_Click (object sender , EventArgs e)
         {
-            SavedAns();
-            CheckBoxOff();
-            intCurPage++;
-            if (intCurPage == 4)
-                CheckAnsID();
-            LoadQuesAns();
+            // kiểm tra câu sau khi bấm next đó đã làm hay chưa
+            try
+            {
+                // số câu phải hợp lệ thì mới lưu kết quả 
+                if (intCurPage <= client_login.quiz.QuesNum && intCurPage >= 1)
+                    SavedAns();
+                intCurPage++;
+                
+                if (intCurPage > client_login.quiz.QuesNum) { 
+                    intCurPage--; // phải trừ xuống để đảm bảo intCurPage. Ko có  thì thằng user ngáo  nào nó bấm next quài là đi 1 sải dài 
+                    throw new Exception(); 
+                }
+                // những câu đã làm thì load câu đó và load câu trả lời đã làm 
+                else if (intCurPage <= liClientAns.Count)
+                {
+                    LoadQuesAns();
+                    ShowCheckedAns();
+                }
 
-            if (intCurPage <= liClientAns.Count)
-                ShowCheckedAns();
+                // những câu chưa làm thì chắc chắn sẽ checkboxOff và load câu mới 
+                else
+                {
+                    CheckBoxOff();
+                    LoadQuesAns();
+                }
+            }
+            catch
+            {
+                MessageBox.Show("You have finished your test . Please sumbit !!! ");
+            }
+                      
+
         }
 
         private void CheckBoxOff ()
@@ -194,19 +257,27 @@ namespace OnlineQuiz
         // Tải câu hỏi và đáp án khi đổi trang
         private void LoadQuesAns ()
         {
-            lb_ques.Text = client_login.liQuesAns[intCurPage - 1].QuesContent;
-            rb_ans1.Text = client_login.liQuesAns[intCurPage - 1].Answers[0].AnsContent;
-            rb_ans2.Text = client_login.liQuesAns[intCurPage - 1].Answers[1].AnsContent;
-            rb_ans3.Text = client_login.liQuesAns[intCurPage - 1].Answers[2].AnsContent;
-            rb_ans4.Text = client_login.liQuesAns[intCurPage - 1].Answers[3].AnsContent;
-            tb_curPage.Text = intCurPage.ToString();
+            
+                lb_ques.Text = client_login.liQuesAns[intCurPage - 1].QuesContent;
+                rb_ans1.Text = client_login.liQuesAns[intCurPage - 1].Answers[0].AnsContent;
+                rb_ans2.Text = client_login.liQuesAns[intCurPage - 1].Answers[1].AnsContent;
+                rb_ans3.Text = client_login.liQuesAns[intCurPage - 1].Answers[2].AnsContent;
+                rb_ans4.Text = client_login.liQuesAns[intCurPage - 1].Answers[3].AnsContent;
+                tb_curPage.Text = intCurPage.ToString();
 
-            if (client_login.liQuesAns[intCurPage - 1].PictureLink != "")
-            {
-                string path = @"../QuesPicture/" + client_login.liQuesAns[intCurPage - 1].PictureLink.ToString();
-                pb_ques.Load(path);
-                pb_ques.SizeMode = PictureBoxSizeMode.StretchImage;
-            }
+                if (client_login.liQuesAns[intCurPage - 1].PictureLink != "")
+                {
+                    string path = @"../QuesPicture/" + client_login.liQuesAns[intCurPage - 1].PictureLink.ToString();
+                    pb_ques.Load(path);
+                    pb_ques.SizeMode = PictureBoxSizeMode.StretchImage;
+                }
+                else
+                {
+                pb_ques.InitialImage = null;
+                pb_ques.Image = null;
+                }
+            
+            
         }
 
         private void CheckAnsID ()
@@ -233,13 +304,16 @@ namespace OnlineQuiz
                 rb_ans3.Checked = true;
             else if (liClientAns[intCurPage - 1].AnsID == client_login.liQuesAns[intCurPage - 1].Answers[3].AnsID)
                 rb_ans4.Checked = true;
+            else
+                CheckBoxOff();
         }
 
         // ------------------- Nộp và gửi kết quả cho server -------------------
 
         private void btn_submit_Click (object sender , EventArgs e)
         {
-            SavedAns();
+            if (intCurPage <= client_login.quiz.QuesNum && intCurPage >= 1)
+                SavedAns();
             SendClientAns();
         }
 
@@ -267,14 +341,30 @@ namespace OnlineQuiz
                 QuesID = quesID ,
                 AnsID = ansID
             };
-
-            // xoá những phần tử bị trùng
+            
+            // ghi đè giá trị lên các phần tử rỗng ban đầu của liClientAns
             for (int i = 0; i < liClientAns.Count; i++)
             {
+                /*
                 if (ca.QuesID == liClientAns[i].QuesID)
-                    liClientAns.RemoveAt(i);
+                {
+                    liClientAns[i] = ca;
+                    CheckAnsID();
+                    return;
+                }
+                else */
+                if ( intCurPage-1 == i ) {
+                    liClientAns[i] = ca;
+                    CheckAnsID();
+                    break;
+                    }
+
             }
-            liClientAns.Add(ca);
+                
+            
+         //   liClientAns.Add(ca);
+
+          //  CheckAnsID();
         }
 
         // Gửi câu trả lời cho Server
@@ -301,6 +391,8 @@ namespace OnlineQuiz
                     break;
                 }
             }
+            // Xóa hết dữ liệu bên client
+            clearAllDataFromClient();
 
             // Nhận kết quả
             if (sr.ReadLine() == "FINISH GRADED")
@@ -310,6 +402,13 @@ namespace OnlineQuiz
                 timer.Stop();
                 Close();
             }
+        }
+
+        private void clearAllDataFromClient()
+        {
+            // xóa list gì thì gọi hàm Clear() của list đó .
+            client_login.liQuesAns.Clear();
+            liClientAns.Clear();
         }
 
     }
