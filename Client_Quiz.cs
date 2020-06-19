@@ -177,6 +177,8 @@ namespace OnlineQuiz
             
             try
             {
+               // btnPrevious.Visible = true;
+                btnNext.Visible = true;
                 // số câu phải hợp lệ thì mới lưu kết quả 
                 if (intCurPage <= client_login.quiz.QuesNum && intCurPage >= 1 )
                     SavedAns();
@@ -205,7 +207,8 @@ namespace OnlineQuiz
             }
             catch
             {
-                MessageBox.Show("Bạn không thể lùi được nữa!");
+                //MessageBox.Show("Bạn không thể lùi được nữa!");
+                btnPrevious.Visible = false;
             }
             
         }
@@ -215,6 +218,8 @@ namespace OnlineQuiz
             // kiểm tra câu sau khi bấm next đó đã làm hay chưa
             try
             {
+                //  btnNext.Visible = true;
+                btnPrevious.Visible = true;
                 // số câu phải hợp lệ thì mới lưu kết quả 
                 if (intCurPage <= client_login.quiz.QuesNum && intCurPage >= 1)
                     SavedAns();
@@ -240,7 +245,8 @@ namespace OnlineQuiz
             }
             catch
             {
-                MessageBox.Show("Bạn đã đến câu cuối của quiz!");
+                // MessageBox.Show("Bạn đã đến câu cuối của quiz!");
+                btnNext.Visible = false;
             }
                       
 
