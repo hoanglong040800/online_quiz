@@ -24,15 +24,12 @@ namespace OnlineQuiz
             if (sr.ReadLine() == "LOGIN SUCCESS")
             {
                 MessageBox.Show("Đăng nhập thành công");
-                //sr.Close();
-                //cli.CloseConnection();
                 return true;
             }
 
             else
             {
                 MessageBox.Show("Tham gia Quiz thất bại! Vui lòng kiểm tra lại MSSV và Mã code quiz");
-                cli.CloseConnection();
                 return false;
             }
         }

@@ -47,11 +47,14 @@ namespace OnlineQuiz
             StreamWriter sw = new StreamWriter(tcpClient.GetStream());
             NetworkStream ns = tcpClient.GetStream();
             sw.AutoFlush = true;
-            string strRequest = "";
+            string strRequest = "";          
 
             while (true)
             {
                 strRequest = sr.ReadLine();
+                if (strRequest == null)
+                    continue;
+
                 if (strRequest == "LOGIN")
                 {
                     if (LoginCheck(sr , sw))
@@ -77,6 +80,7 @@ namespace OnlineQuiz
                     break;
                 }
             }
+            
 
 
             sr.Close();

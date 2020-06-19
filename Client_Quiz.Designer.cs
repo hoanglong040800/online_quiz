@@ -254,12 +254,12 @@
             // 
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("Chonburi", 11F);
-            this.label2.Location = new System.Drawing.Point(191, 42);
+            this.label2.Font = new System.Drawing.Font("Chonburi", 12F);
+            this.label2.Location = new System.Drawing.Point(180, 43);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(34, 18);
+            this.label2.Size = new System.Drawing.Size(42, 19);
             this.label2.TabIndex = 51;
-            this.label2.Text = "/20";
+            this.label2.Text = "/ 20";
             // 
             // client_quiz
             // 

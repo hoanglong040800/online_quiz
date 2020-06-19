@@ -205,7 +205,7 @@ namespace OnlineQuiz
             }
             catch
             {
-                MessageBox.Show("You have not finished your test yet  . Please do it !!! ");
+                MessageBox.Show("Bạn không thể lùi được nữa!");
             }
             
         }
@@ -240,7 +240,7 @@ namespace OnlineQuiz
             }
             catch
             {
-                MessageBox.Show("You have finished your test . Please sumbit !!! ");
+                MessageBox.Show("Bạn đã đến câu cuối của quiz!");
             }
                       
 
@@ -410,6 +410,5 @@ namespace OnlineQuiz
             client_login.liQuesAns.Clear();
             liClientAns.Clear();
         }
-
     }
 }
