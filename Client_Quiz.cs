@@ -79,6 +79,8 @@ namespace OnlineQuiz
                         intTimeSecond = 108000;
                 }
             }
+            if (intCurPage == 1) btnPrevious.Visible = false;
+            
             // Tải đề
             LoadQuesAns();
         }
@@ -174,63 +176,46 @@ namespace OnlineQuiz
 
         private void btnPrevious_Click (object sender , EventArgs e)
         {
-            
-            try
-            {
-               // btnPrevious.Visible = true;
-                btnNext.Visible = true;
+
+
+
+            btnNext.Visible = true;
+           
                 // số câu phải hợp lệ thì mới lưu kết quả 
                 if (intCurPage <= client_login.quiz.QuesNum && intCurPage >= 1 )
                     SavedAns();
                 intCurPage--;
+            if (intCurPage == 1) btnPrevious.Visible = false;
 
-                if (intCurPage < 1) { 
-                    intCurPage++; 
-                    throw new Exception(); 
-                }
                 // những câu đã làm thì load câu đó và load câu trả lời đã làm 
                 // ở đây ko đi tới rẽ nhánh  IF thứ 3 đâu 
-                else if (intCurPage <= liClientAns.Count)
+             if (intCurPage <= liClientAns.Count)
                 {
                     LoadQuesAns();
                     ShowCheckedAns();
                 }
-/*
-                //    if (intCurPage  CheckBoxOff();
-                // nhung cau chua lam` 
-                else
-                {
-                    CheckBoxOff();
-                    LoadQuesAns();
-                }
-                */
-            }
-            catch
-            {
-                //MessageBox.Show("Bạn không thể lùi được nữa!");
-                btnPrevious.Visible = false;
-            }
+
+           
             
         }
 
         private void btnNext_Click (object sender , EventArgs e)
         {
+            btnPrevious.Visible = true;
+
+
             // kiểm tra câu sau khi bấm next đó đã làm hay chưa
-            try
-            {
-                //  btnNext.Visible = true;
-                btnPrevious.Visible = true;
-                // số câu phải hợp lệ thì mới lưu kết quả 
-                if (intCurPage <= client_login.quiz.QuesNum && intCurPage >= 1)
+
+            //  btnNext.Visible = true;
+           
+            // số câu phải hợp lệ thì mới lưu kết quả 
+            if (intCurPage <= client_login.quiz.QuesNum && intCurPage >= 1)
                     SavedAns();
                 intCurPage++;
-                
-                if (intCurPage > client_login.quiz.QuesNum) { 
-                    intCurPage--; // phải trừ xuống để đảm bảo intCurPage. Ko có  thì thằng user ngáo  nào nó bấm next quài là đi 1 sải dài 
-                    throw new Exception(); 
-                }
-                // những câu đã làm thì load câu đó và load câu trả lời đã làm 
-                else if (intCurPage <= liClientAns.Count)
+            if (intCurPage == client_login.quiz.QuesNum ) btnNext.Visible = false;
+
+            // những câu đã làm thì load câu đó và load câu trả lời đã làm 
+            if (intCurPage <= liClientAns.Count)
                 {
                     LoadQuesAns();
                     ShowCheckedAns();
@@ -243,14 +228,10 @@ namespace OnlineQuiz
                     LoadQuesAns();
                 }
             }
-            catch
-            {
-                // MessageBox.Show("Bạn đã đến câu cuối của quiz!");
-                btnNext.Visible = false;
-            }
+        
                       
 
-        }
+        
 
         private void CheckBoxOff ()
         {
