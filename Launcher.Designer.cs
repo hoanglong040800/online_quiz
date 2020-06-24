@@ -30,7 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(launcher));
             this.label1 = new System.Windows.Forms.Label();
-            this.btn_server = new System.Windows.Forms.Button();
             this.btn_client = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -45,23 +44,6 @@
             this.label1.Text = "Online Quiz Launcher";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // btn_server
-            // 
-            this.btn_server.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.btn_server.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_server.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_server.Font = new System.Drawing.Font("Chonburi", 10F);
-            this.btn_server.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btn_server.Location = new System.Drawing.Point(34, 125);
-            this.btn_server.MaximumSize = new System.Drawing.Size(108, 35);
-            this.btn_server.MinimumSize = new System.Drawing.Size(108, 35);
-            this.btn_server.Name = "btn_server";
-            this.btn_server.Size = new System.Drawing.Size(108, 35);
-            this.btn_server.TabIndex = 11;
-            this.btn_server.Text = "Server";
-            this.btn_server.UseVisualStyleBackColor = false;
-            this.btn_server.Click += new System.EventHandler(this.btn_server_Click);
-            // 
             // btn_client
             // 
             this.btn_client.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
@@ -69,7 +51,7 @@
             this.btn_client.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_client.Font = new System.Drawing.Font("Chonburi", 10F);
             this.btn_client.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btn_client.Location = new System.Drawing.Point(34, 196);
+            this.btn_client.Location = new System.Drawing.Point(32, 137);
             this.btn_client.Name = "btn_client";
             this.btn_client.Size = new System.Drawing.Size(108, 35);
             this.btn_client.TabIndex = 12;
@@ -86,7 +68,6 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(174, 261);
             this.Controls.Add(this.btn_client);
-            this.Controls.Add(this.btn_server);
             this.Controls.Add(this.label1);
             this.DoubleBuffered = true;
             this.MaximumSize = new System.Drawing.Size(190, 300);
@@ -101,7 +82,6 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btn_server;
         private System.Windows.Forms.Button btn_client;
     }
 }

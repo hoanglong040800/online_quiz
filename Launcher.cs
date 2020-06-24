@@ -15,16 +15,12 @@ namespace OnlineQuiz
         public launcher()
         {
             InitializeComponent();
+            (new server_launcher()).Show();
         }
 
         private void btn_client_Click(object sender, EventArgs e)
         {
             (new client_login()).Show();
-        }
-
-        private void btn_server_Click(object sender, EventArgs e)
-        {
-            (new server_launcher()).Show();
         }
     }
 }
