@@ -1,4 +1,4 @@
-﻿namespace OnlineQuiz
+﻿namespace ClientSide
 {
     partial class client_login
     {
@@ -149,6 +149,7 @@
             this.Name = "client_login";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.client_login_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.pb_uit)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

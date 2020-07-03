@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.28307.1062
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineQuiz", "OnlineQuiz.csproj", "{9687219D-641F-4AB2-A645-9BFD89BE09D8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientSide", "Client\ClientSide.csproj", "{83C058AA-0DBD-4F74-85F6-46EC1AB6B3A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassOnlineQuiz", "ClassOnlineQuiz\ClassOnlineQuiz.csproj", "{A1861701-CCFC-43DA-855C-D4DB016FDF85}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{9687219D-641F-4AB2-A645-9BFD89BE09D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9687219D-641F-4AB2-A645-9BFD89BE09D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9687219D-641F-4AB2-A645-9BFD89BE09D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83C058AA-0DBD-4F74-85F6-46EC1AB6B3A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83C058AA-0DBD-4F74-85F6-46EC1AB6B3A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83C058AA-0DBD-4F74-85F6-46EC1AB6B3A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83C058AA-0DBD-4F74-85F6-46EC1AB6B3A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1861701-CCFC-43DA-855C-D4DB016FDF85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1861701-CCFC-43DA-855C-D4DB016FDF85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1861701-CCFC-43DA-855C-D4DB016FDF85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1861701-CCFC-43DA-855C-D4DB016FDF85}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

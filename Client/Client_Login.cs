@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using ClassOnlineQuiz;
 
-namespace OnlineQuiz
+namespace ClientSide
 {
     public partial class client_login : Form
     {
@@ -40,14 +41,16 @@ namespace OnlineQuiz
             strStuIDGlobal = strStuID;
             string strQuizID = tb_QuizID.Text.Trim();
             strQuizIDGlobal = strQuizID;
-            StreamReader sr = new StreamReader(cli.ns);
-            StreamWriter sw = new StreamWriter(cli.ns);
+            
 
             if (strStuID == "" || strQuizID == "")
             {
                 MessageBox.Show("Vui lòng nhập đầy đủ MSSV và mã code quiz");
                 return;
             }
+
+            StreamReader sr = new StreamReader(cli.ns);
+            StreamWriter sw = new StreamWriter(cli.ns);
 
             sw.WriteLine("LOGIN");
             sw.WriteLine(strStuID);
@@ -73,8 +76,15 @@ namespace OnlineQuiz
                 cli.CloseConnection();
 
                 (new client_quizinfo()).Show();
-                Close();
+                Hide();
             }
+        }
+
+        private void client_login_FormClosing (object sender , FormClosingEventArgs e)
+        {
+            StreamWriter sw = new StreamWriter(cli.ns);
+            sw.WriteLine("CLOSE");
+            cli.CloseConnection();
         }
     }
 }

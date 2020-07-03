@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace OnlineQuiz
+namespace ClientSide
 {
     public partial class client_quizinfo : Form
     {

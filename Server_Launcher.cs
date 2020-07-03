@@ -10,6 +10,7 @@ using System.Net.Sockets;
 using System.IO;
 using System.Threading;
 using System.Runtime.Serialization.Formatters.Binary;
+using ClassOnlineQuiz;
 
 namespace OnlineQuiz
 {
@@ -54,6 +55,9 @@ namespace OnlineQuiz
                 strRequest = sr.ReadLine();
                 if (strRequest == null)
                     continue;
+
+                if (strRequest == "CLOSE")
+                    break;
 
                 if (strRequest == "LOGIN")
                 {

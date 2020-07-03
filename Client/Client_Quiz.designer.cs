@@ -1,4 +1,4 @@
-﻿namespace OnlineQuiz
+﻿namespace ClientSide
 {
     partial class client_quiz
     {
@@ -53,10 +53,10 @@
             // 
             this.lb_ques.BackColor = System.Drawing.Color.Transparent;
             this.lb_ques.Font = new System.Drawing.Font("Verdana", 12F);
-            this.lb_ques.Location = new System.Drawing.Point(42, 91);
+            this.lb_ques.Location = new System.Drawing.Point(42, 117);
             this.lb_ques.Margin = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.lb_ques.Name = "lb_ques";
-            this.lb_ques.Size = new System.Drawing.Size(543, 189);
+            this.lb_ques.Size = new System.Drawing.Size(543, 143);
             this.lb_ques.TabIndex = 27;
             this.lb_ques.Text = "Which network design may be recommended for a small campus site that consists of " +
     "a single building with a few users?";
@@ -288,6 +288,7 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "      ";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.client_quiz_FormClosing);
             this.Load += new System.EventHandler(this.client_quiz_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pb_ques)).EndInit();
             this.ResumeLayout(false);

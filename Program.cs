@@ -13,7 +13,7 @@ namespace OnlineQuiz
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new launcher());           
+            Application.Run(new server_launcher());           
         }       
     }
 }

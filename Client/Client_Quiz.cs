@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using ClassOnlineQuiz;
 
-namespace OnlineQuiz
+namespace ClientSide
 {
 
     public partial class client_quiz:Form
@@ -14,6 +15,7 @@ namespace OnlineQuiz
         int intTime;
         bool boolCheckTimeOut = false;
         int intCurPage = 1;
+        bool isSubmitted = false;
         List<ClientAns> liClientAns = new List<ClientAns>(client_login.quiz.QuesNum);
 
         public client_quiz ()
@@ -172,6 +174,24 @@ namespace OnlineQuiz
 
             if (intCurPage <= liClientAns.Count)
                 ShowCheckedAns();
+
+            if (intCurPage == 1)
+            {
+                btnPrevious.Visible = false;
+                btnNext.Visible = true;
+            }
+
+            else if (intCurPage == client_login.quiz.QuesNum)
+            {
+                btnNext.Visible = false;
+                btnPrevious.Visible = true;
+            }
+
+            else
+            {
+                btnPrevious.Visible = true;
+                btnNext.Visible = true;
+            }
         }
 
         private void btnPrevious_Click (object sender , EventArgs e)
@@ -207,31 +227,29 @@ namespace OnlineQuiz
             // kiểm tra câu sau khi bấm next đó đã làm hay chưa
 
             //  btnNext.Visible = true;
-           
+
             // số câu phải hợp lệ thì mới lưu kết quả 
             if (intCurPage <= client_login.quiz.QuesNum && intCurPage >= 1)
-                    SavedAns();
-                intCurPage++;
-            if (intCurPage == client_login.quiz.QuesNum ) btnNext.Visible = false;
+                SavedAns();
+            intCurPage++;
+            if (intCurPage == client_login.quiz.QuesNum)
+                btnNext.Visible = false;
 
             // những câu đã làm thì load câu đó và load câu trả lời đã làm 
             if (intCurPage <= liClientAns.Count)
-                {
-                    LoadQuesAns();
-                    ShowCheckedAns();
-                }
-
-                // những câu chưa làm thì chắc chắn sẽ checkboxOff và load câu mới 
-                else
-                {
-                    CheckBoxOff();
-                    LoadQuesAns();
-                }
+            {
+                LoadQuesAns();
+                ShowCheckedAns();
             }
-        
-                      
 
-        
+            // những câu chưa làm thì chắc chắn sẽ checkboxOff và load câu mới 
+            else
+            {
+                CheckBoxOff();
+                LoadQuesAns();
+            }
+        }
+              
 
         private void CheckBoxOff ()
         {
@@ -244,27 +262,25 @@ namespace OnlineQuiz
         // Tải câu hỏi và đáp án khi đổi trang
         private void LoadQuesAns ()
         {
-            
-                lb_ques.Text = client_login.liQuesAns[intCurPage - 1].QuesContent;
-                rb_ans1.Text = client_login.liQuesAns[intCurPage - 1].Answers[0].AnsContent;
-                rb_ans2.Text = client_login.liQuesAns[intCurPage - 1].Answers[1].AnsContent;
-                rb_ans3.Text = client_login.liQuesAns[intCurPage - 1].Answers[2].AnsContent;
-                rb_ans4.Text = client_login.liQuesAns[intCurPage - 1].Answers[3].AnsContent;
-                tb_curPage.Text = intCurPage.ToString();
+            lb_ques.Text = client_login.liQuesAns[intCurPage - 1].QuesContent;
+            rb_ans1.Text = client_login.liQuesAns[intCurPage - 1].Answers[0].AnsContent;
+            rb_ans2.Text = client_login.liQuesAns[intCurPage - 1].Answers[1].AnsContent;
+            rb_ans3.Text = client_login.liQuesAns[intCurPage - 1].Answers[2].AnsContent;
+            rb_ans4.Text = client_login.liQuesAns[intCurPage - 1].Answers[3].AnsContent;
+            tb_curPage.Text = intCurPage.ToString();
 
-                if (client_login.liQuesAns[intCurPage - 1].PictureLink != "")
-                {
-                    string path = @"../QuesPicture/" + client_login.liQuesAns[intCurPage - 1].PictureLink.ToString();
-                    pb_ques.Load(path);
-                    pb_ques.SizeMode = PictureBoxSizeMode.StretchImage;
-                }
-                else
-                {
+            if (client_login.liQuesAns[intCurPage - 1].PictureLink != "")
+            {
+                string path = @"../../QuesPicture/" + client_login.liQuesAns[intCurPage - 1].PictureLink.ToString();
+                pb_ques.Load(path);
+                pb_ques.SizeMode = PictureBoxSizeMode.StretchImage;
+            }
+
+            else
+            {
                 pb_ques.InitialImage = null;
                 pb_ques.Image = null;
-                }
-            
-            
+            }
         }
 
         private void CheckAnsID ()
@@ -299,9 +315,12 @@ namespace OnlineQuiz
 
         private void btn_submit_Click (object sender , EventArgs e)
         {
+
             if (intCurPage <= client_login.quiz.QuesNum && intCurPage >= 1)
                 SavedAns();
-            SendClientAns();
+
+            if (MessageBox.Show("Bạn có muốn nộp bài?" , "Xác nhận hoàn tất" , MessageBoxButtons.OKCancel) == DialogResult.OK)
+                SendClientAns();
         }
 
         private void SavedAns()
@@ -378,15 +397,17 @@ namespace OnlineQuiz
                     break;
                 }
             }
+
             // Xóa hết dữ liệu bên client
             clearAllDataFromClient();
 
             // Nhận kết quả
             if (sr.ReadLine() == "FINISH GRADED")
             {
-                (new client_result( int.Parse(sr.ReadLine()) , float.Parse(sr.ReadLine()) )).Show();
+                (new client_result(int.Parse(sr.ReadLine()) , float.Parse(sr.ReadLine()) )).Show();
                 cli.CloseConnection();
                 timer.Stop();
+                isSubmitted = true;
                 Close();
             }
         }
@@ -397,5 +418,15 @@ namespace OnlineQuiz
             client_login.liQuesAns.Clear();
             liClientAns.Clear();
         }
+
+        private void client_quiz_FormClosing (object sender , FormClosingEventArgs e)
+        {
+            if (isSubmitted == true)
+                return;
+
+            else if (MessageBox.Show("Tắt form trong lúc thực hiện sẽ không lưu điểm. Tiếp tục?" , "Cảnh báo!" , MessageBoxButtons.OKCancel) == DialogResult.Cancel)
+                e.Cancel = true;
+        }
+
     }
 }

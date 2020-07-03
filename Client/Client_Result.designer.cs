@@ -1,5 +1,4 @@
-﻿namespace OnlineQuiz
-
+﻿namespace ClientSide
 {
 
     partial class client_result
@@ -14,7 +13,7 @@
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
+        protected override void Dispose (bool disposing)
         {
             if (disposing && (components != null))
             {
@@ -29,7 +28,7 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
+        private void InitializeComponent ()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(client_result));
             this.btn_exit = new System.Windows.Forms.Button();
@@ -205,6 +204,7 @@
             this.Name = "client_result";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.client_result_FormClosed);
             this.gb_result.ResumeLayout(false);
             this.gb_result.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pb_uit)).EndInit();

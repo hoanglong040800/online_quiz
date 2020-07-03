@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OnlineQuiz
+namespace ClassOnlineQuiz
 {
     [Serializable]
-    public class ClientAns
+   public class Ans
     {
-        public string QuesID { get; set; }
         public string AnsID { get; set; }
-
+        public string AnsContent { get; set; }
     }
 }

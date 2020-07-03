@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace OnlineQuiz
+namespace ClientSide
 {
     public partial class client_result : Form
     {
@@ -16,6 +16,12 @@ namespace OnlineQuiz
         private void btn_exit_Click (object sender , System.EventArgs e)
         {
             Close();
+            //Owner.Close();
+        }
+
+        private void client_result_FormClosed (object sender , FormClosedEventArgs e)
+        {
+            //Owner.Close();
         }
     }
 }
